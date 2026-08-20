@@ -1,5 +1,5 @@
 import { Flex, Box, Text } from "@radix-ui/themes";
-import Logo from "../assets/logos/wheres-wally-logo.png";
+import Logo from "../assets/logos/logo-text-only.png";
 
 const Footer = () => {
   return (

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { Box, Button, Flex, Text } from "@radix-ui/themes";
 import { Menu, X } from "lucide-react";
-import Logo from "../assets/logos/wheres-wally-logo.png";
+import Logo from "../assets/logos/logo-text-only.png";
 
 const LogoLink = () => {
   return (
