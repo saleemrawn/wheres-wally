@@ -7,7 +7,7 @@ import "@radix-ui/themes/styles.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Theme>
+    <Theme radius="full" hasBackground={false}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
