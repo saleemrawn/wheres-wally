@@ -76,7 +76,7 @@ const Nav = () => {
 
 const Header = () => {
   return (
-    <header class="bg-white shadow-xl z-1">
+    <header className="bg-white shadow-xl z-1">
       <Flex justify={"between"} align={"center"} p={"4"}>
         <LogoLink />
         <Nav />
