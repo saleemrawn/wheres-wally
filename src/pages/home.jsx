@@ -30,9 +30,13 @@ const Home = () => {
             </Heading>
             <Text>
               <ul className="list-disc">
-                <li>Play all 5 rounds</li>
-                <li>Tag the photo & select a character from the popup</li>
-                <li>Find all the characters in fastest possible time</li>
+                <li className="mb-2 md:mb-1">Play all 5 rounds</li>
+                <li className="mb-2 md:mb-1">
+                  Tag the photo & select a character from the popup
+                </li>
+                <li className="mb-2 md:mb-1">
+                  Find all the characters in fastest possible time
+                </li>
                 <li>
                   Submit your name if your time has made it into the top 10
                 </li>
