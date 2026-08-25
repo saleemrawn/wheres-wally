@@ -6,6 +6,7 @@ import App from "./app.jsx";
 import Home from "./pages/home.jsx";
 import Leaderboard from "./features/leaderboard/leaderboard.jsx";
 import "@radix-ui/themes/styles.css";
+import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
