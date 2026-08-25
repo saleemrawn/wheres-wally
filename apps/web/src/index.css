@@ -10,3 +10,34 @@
   --default-font-family: var(--font-inter);
   --heading-font-family: var(--font-sniglet);
 }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  background: repeating-linear-gradient(
+    #ffffff,
+    #ffffff 7.5rem,
+    #d11007 0,
+    #d11007 15rem
+  );
+  background-position: 0 -46.875rem;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a:hover,
+button:hover {
+  cursor: pointer;
+}
