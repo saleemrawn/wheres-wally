@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Character {
+  id              Int       @id @default(autoincrement())
+  name            String    @unique
+  imgPath         String
+  coordinates     Coordinate[]
+  illustrations   Illustration[]
+
+  @@map("characters")
+}
+
+model Coordinate {
+   id              Int   @id @default(autoincrement())
+   startX          Int
+   startY          Int
+   minX            Int
+   maxX            Int
+   maxY            Int
+   character       Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+   characterId     Int
+   illustration    Illustration @relation(fields: [illustrationId], references: [id], onDelete: Cascade)
+   illustrationId  Int
+
+   @@map("coordinates")
+}
+
+model Leaderboard {
+   id    Int   @id @default(autoincrement())
+   name  String
+   time  Int
+
+   @@map("leaderboard")
+}
+
+model Illustration {
+   id           Int   @id @default(autoincrement())
+   name         String
+   imgPath      String
+   characters   Character[]
+   coordinates  Coordinate[]
+
+   @@map("illustrations")
+}
