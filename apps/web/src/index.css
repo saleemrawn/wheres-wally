@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sniglet:wght@400&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", sans-serif;
+  --font-sniglet: "Sniglet", sans-serif;
+}
+
+.radix-themes {
+  --default-font-family: var(--font-inter);
+  --heading-font-family: var(--font-sniglet);
+}
