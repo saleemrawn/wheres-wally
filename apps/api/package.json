@@ -6,7 +6,9 @@
   "workspaces": [
     "apps/*"
   ],
-  "scripts": {},
+  "scripts": {
+    "dev": "node --watch app.js"
+  },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
