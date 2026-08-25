@@ -1,5 +1,5 @@
 {
-  "name": "wheres-wally-app",
+  "name": "@wheres-wally-app/web",
   "private": true,
   "version": "0.0.0",
   "type": "module",
