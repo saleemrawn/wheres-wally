@@ -42,8 +42,8 @@ const CharacterList = ({ onCharacterClick }) => {
         onValueChange={onCharacterClick}
       >
         {characters?.map((character) => (
-          <Skeleton loading={isLoading}>
-            <RadioCards.Item value={character.id} key={character.id}>
+          <Skeleton loading={isLoading} key={character.id}>
+            <RadioCards.Item value={character.id}>
               <CharacterItem
                 characterName={character.name}
                 imgSrc={character.imgSrc}
