@@ -23,7 +23,7 @@ const CharacterItem = ({ characterName, imgSrc, imgAlt }) => {
 const CharacterList = ({ onCharacterClick }) => {
   const { characters, isLoading, error } = useCharacter();
 
-  if (characters.length === 0) {
+  if (characters?.length === 0) {
     return (
       <Callout.Root color="red" className="w-full">
         <Callout.Icon>
@@ -41,7 +41,7 @@ const CharacterList = ({ onCharacterClick }) => {
         columns={{ initial: "1", sm: "3", lg: "5" }}
         onValueChange={onCharacterClick}
       >
-        {characters.map((character) => (
+        {characters?.map((character) => (
           <Skeleton loading={isLoading}>
             <RadioCards.Item value={character.id} key={character.id}>
               <CharacterItem
