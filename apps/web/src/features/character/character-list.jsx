@@ -1,4 +1,5 @@
 import { useCharacter } from "./use-character";
+import { CHARACTER_ASSETS } from "./character";
 import { Info } from "lucide-react";
 import {
   Box,
@@ -13,7 +14,7 @@ const CharacterItem = ({ characterName, imgToken, imgAlt }) => {
   return (
     <Flex direction={"column"} justify={"center"} align={"center"} gap={"4"}>
       <Box className="m-w-100">
-        <img src={imgToken} alt={imgAlt} />
+        <img src={CHARACTER_ASSETS[imgToken]} alt={imgAlt} />
       </Box>
       <Text>{characterName}</Text>
     </Flex>
