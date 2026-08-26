@@ -10,7 +10,7 @@ datasource db {
 model Character {
   id              Int       @id @default(autoincrement())
   name            String    @unique
-  imgPath         String
+  imageToken      String
   coordinates     Coordinate[]
   illustrations   Illustration[]
 
@@ -43,7 +43,7 @@ model Leaderboard {
 model Illustration {
    id           Int   @id @default(autoincrement())
    name         String
-   imgPath      String
+   imageToken   String
    characters   Character[]
    coordinates  Coordinate[]
 
