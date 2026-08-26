@@ -1,7 +1,10 @@
 import "dotenv/config";
 import express from "express";
+import * as routes from "./routes/routes.js";
 
 const app = express();
+
+app.use("/api/characters", routes.character);
 
 app.listen(process.env.PORT, (err) => {
   if (err) {
