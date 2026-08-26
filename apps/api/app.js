@@ -5,6 +5,7 @@ import * as routes from "./routes/routes.js";
 const app = express();
 
 app.use("/api/characters", routes.character);
+app.use("/api/illustrations", routes.illustration);
 
 app.listen(process.env.PORT, (err) => {
   if (err) {
