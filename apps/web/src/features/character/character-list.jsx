@@ -9,11 +9,11 @@ import {
   Callout,
 } from "@radix-ui/themes";
 
-const CharacterItem = ({ characterName, imgSrc, imgAlt }) => {
+const CharacterItem = ({ characterName, imgToken, imgAlt }) => {
   return (
     <Flex direction={"column"} justify={"center"} align={"center"} gap={"4"}>
       <Box className="m-w-100">
-        <img src={imgSrc} alt={imgAlt} />
+        <img src={imgToken} alt={imgAlt} />
       </Box>
       <Text>{characterName}</Text>
     </Flex>
@@ -46,7 +46,7 @@ const CharacterList = ({ onCharacterClick }) => {
             <RadioCards.Item value={character.id}>
               <CharacterItem
                 characterName={character.name}
-                imgSrc={character.imgSrc}
+                imgToken={character.imageToken}
                 imgAlt={character.name}
               />
             </RadioCards.Item>
