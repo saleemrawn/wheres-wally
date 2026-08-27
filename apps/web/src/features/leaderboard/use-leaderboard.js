@@ -1,11 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import * as service from "./leaderboard-service.js";
 
 const useLeaderboard = () => {
-  const [players, setPlayers] = useState([]);
+  const [leaderboard, setLeaderboard] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  return { players, isLoading, error };
+  const getLeaderboard = async () => {
+    setIsLoading(true);
+    try {
+      const entries = await service.getLeaderboard();
+      setLeaderboard(entries.data);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getLeaderboard();
+  }, []);
+
+  return { leaderboard, isLoading, error };
 };
 
 export { useLeaderboard };
