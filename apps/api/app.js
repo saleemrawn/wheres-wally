@@ -6,6 +6,7 @@ const app = express();
 
 app.use("/api/characters", routes.character);
 app.use("/api/illustrations", routes.illustration);
+app.use("/api/leaderboards", routes.leaderboard);
 
 app.listen(process.env.PORT, (err) => {
   if (err) {
