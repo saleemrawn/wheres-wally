@@ -3,7 +3,7 @@ import { getOrdinalSuffix } from "../../utils/number";
 import { Container, Heading, Table, Flex, Skeleton } from "@radix-ui/themes";
 
 const LeaderboardList = () => {
-  const { players, isLoading, error } = useLeaderboard();
+  const { leaderboard, isLoading, error } = useLeaderboard();
 
   return (
     <Skeleton loading={isLoading}>
@@ -17,7 +17,7 @@ const LeaderboardList = () => {
         </Table.Header>
 
         <Table.Body>
-          {players.length === 0 ? (
+          {leaderboard.length === 0 ? (
             <Table.Row>
               <Table.Cell colSpan={"3"}>
                 No players yet — be the first!
@@ -26,7 +26,7 @@ const LeaderboardList = () => {
               <Table.Cell></Table.Cell>
             </Table.Row>
           ) : (
-            players.map((player, index) => (
+            leaderboard.map((player, index) => (
               <Table.Row key={player?.id}>
                 <Table.Cell>{getOrdinalSuffix(index + 1)}</Table.Cell>
                 <Table.Cell>{player?.name}</Table.Cell>
