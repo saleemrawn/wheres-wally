@@ -1,5 +1,5 @@
 import { useCharacter } from "./use-character";
-import { CHARACTER_ASSETS } from "./character";
+import { CHARACTER_ASSETS } from "./character-assets";
 import { Info } from "lucide-react";
 import {
   Box,
