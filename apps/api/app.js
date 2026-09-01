@@ -4,6 +4,8 @@ import * as routes from "./routes/routes.js";
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/api/characters", routes.character);
 app.use("/api/illustrations", routes.illustration);
 app.use("/api/leaderboards", routes.leaderboard);
