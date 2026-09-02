@@ -1,9 +1,10 @@
+import { VIEWER_ASSETS } from "./viewer-assets";
 import { Box } from "@radix-ui/themes";
 
 const ViewerImage = ({ token }) => {
   return (
     <>
-      <img src={token} />
+      <img src={VIEWER_ASSETS[token]} />
     </>
   );
 };
