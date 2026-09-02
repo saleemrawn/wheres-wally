@@ -63,4 +63,4 @@ const Leaderboard = () => {
   );
 };
 
-export default Leaderboard;
+export { Leaderboard };

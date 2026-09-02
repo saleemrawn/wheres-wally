@@ -16,4 +16,4 @@ const RoundsDisplay = ({ currentRound, totalRounds }) => {
   );
 };
 
-export default RoundsDisplay;
+export { RoundsDisplay };

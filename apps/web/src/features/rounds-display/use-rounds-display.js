@@ -11,4 +11,4 @@ const useRoundsDisplay = (total) => {
   return { currentRound, totalRounds, updateCurrentRound };
 };
 
-export default useRoundsDisplay;
+export { useRoundsDisplay };

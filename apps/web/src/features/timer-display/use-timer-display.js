@@ -38,4 +38,4 @@ const useTimerDisplay = () => {
   return { time, startTimer, endTimer };
 };
 
-export default useTimerDisplay;
+export { useTimerDisplay };

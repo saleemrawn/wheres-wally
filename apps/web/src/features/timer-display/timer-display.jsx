@@ -29,4 +29,4 @@ const TimerDisplay = ({ time }) => {
   );
 };
 
-export default TimerDisplay;
+export { TimerDisplay };
