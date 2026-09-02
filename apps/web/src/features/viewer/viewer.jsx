@@ -9,17 +9,21 @@ const ViewerImage = ({ token }) => {
   );
 };
 
-const ViewerContainer = ({ children }) => {
+const ViewerContainer = ({ children, onClick }) => {
   return (
-    <Box height={"100%"} className="bg-white overflow-y-scroll">
+    <Box
+      height={"100%"}
+      className="bg-white overflow-y-scroll"
+      onClick={onClick}
+    >
       {children}
     </Box>
   );
 };
 
-const Viewer = ({ token }) => {
+const Viewer = ({ token, onClick }) => {
   return (
-    <ViewerContainer>
+    <ViewerContainer onClick={onClick}>
       <ViewerImage token={token} />
     </ViewerContainer>
   );
