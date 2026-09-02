@@ -1,12 +1,18 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useViewerImages } from "../viewer/use-viewer-images";
 
-const useRoundsDisplay = (total) => {
-  const [totalRounds, setTotalRounds] = useState(total);
+const useRoundsDisplay = () => {
+  const { images } = useViewerImages();
+  const [totalRounds, setTotalRounds] = useState();
   const [currentRound, setCurrentRound] = useState(1);
 
   const updateCurrentRound = useCallback(() => {
     setCurrentRound((prev) => prev + 1);
   });
+
+  useEffect(() => {
+    setTotalRounds(images?.length);
+  }, [images]);
 
   return { currentRound, totalRounds, updateCurrentRound };
 };

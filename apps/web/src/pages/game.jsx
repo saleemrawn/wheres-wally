@@ -11,7 +11,7 @@ import { useViewer } from "../features/viewer/use-viewer";
 const Game = () => {
   const { setGameRunning, setGameFinished } = useGameStateUpdate();
   const { time, startTimer, endTimer } = useTimerDisplay();
-  const { currentRound, totalRounds } = useRoundsDisplay(5);
+  const { currentRound, totalRounds } = useRoundsDisplay();
   const { image, isLoading } = useViewer(currentRound);
 
   useEffect(() => {
