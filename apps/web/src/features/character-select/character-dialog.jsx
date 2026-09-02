@@ -1,8 +1,7 @@
 import { Dialog, Button, Flex } from "@radix-ui/themes";
 import { X } from "lucide-react";
-import CharacterList from "./character-list";
 
-const CharacterDialog = ({ isOpen, onClose, onCharacterClick }) => {
+const CharacterDialog = ({ isOpen, onClose }) => {
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Content className="max-w-240! p-10!">
@@ -23,8 +22,6 @@ const CharacterDialog = ({ isOpen, onClose, onCharacterClick }) => {
         <Dialog.Description mb={"4"}>
           Pick a character to check if your selection is correct:
         </Dialog.Description>
-
-        <CharacterList onCharacterClick={onCharacterClick} />
       </Dialog.Content>
     </Dialog.Root>
   );
