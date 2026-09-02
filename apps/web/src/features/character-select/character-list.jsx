@@ -58,4 +58,4 @@ const CharacterList = ({ onSelect }) => {
   );
 };
 
-export default CharacterList;
+export { CharacterList };
