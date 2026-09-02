@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGameStateUpdate } from "../context/game-state";
 import { Viewer } from "../features/viewer/viewer";
 import { CharacterDialog } from "../features/character-select/character-dialog";
@@ -9,6 +9,7 @@ import { RoundsDisplay } from "../features/rounds-display/rounds-display";
 import { useRoundsDisplay } from "../features/rounds-display/use-rounds-display";
 import { useViewer } from "../features/viewer/use-viewer";
 import { useDialog } from "../hooks/use-dialog";
+import { getSelectedCoordinates } from "../utils/coordinates";
 import { Flex, Skeleton } from "@radix-ui/themes";
 
 const Game = () => {
@@ -17,6 +18,10 @@ const Game = () => {
   const { currentRound, totalRounds } = useRoundsDisplay();
   const { image, isLoading } = useViewer(currentRound);
   const { isOpen, openDialog, closeDialog } = useDialog();
+  const [selectedCoordinates, setSelectedCoordinates] = useState({
+    x: null,
+    y: null,
+  });
 
   useEffect(() => {
     setGameRunning(true);
@@ -26,7 +31,13 @@ const Game = () => {
   return (
     <>
       <Skeleton loading={isLoading}>
-        <Viewer token={image?.imageToken} onClick={openDialog} />
+        <Viewer
+          token={image?.imageToken}
+          onClick={(event) => {
+            setSelectedCoordinates(getSelectedCoordinates(event));
+            openDialog();
+          }}
+        />
       </Skeleton>
 
       <Flex className="bg-red-500">
