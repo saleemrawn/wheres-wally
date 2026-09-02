@@ -14,4 +14,4 @@ const useDialog = () => {
   return { isOpen, openDialog, closeDialog };
 };
 
-export default useDialog;
+export { useDialog };
