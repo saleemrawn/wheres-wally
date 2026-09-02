@@ -18,6 +18,7 @@ const Game = () => {
   const { currentRound, totalRounds } = useRoundsDisplay();
   const { image, isLoading } = useViewer(currentRound);
   const { isOpen, openDialog, closeDialog } = useDialog();
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [selectedCoordinates, setSelectedCoordinates] = useState({
     x: null,
     y: null,
@@ -46,7 +47,7 @@ const Game = () => {
       </Flex>
 
       <CharacterDialog isOpen={isOpen} onClose={closeDialog}>
-        <CharacterList />
+        <CharacterList onSelect={setSelectedCharacter} />
       </CharacterDialog>
     </>
   );
