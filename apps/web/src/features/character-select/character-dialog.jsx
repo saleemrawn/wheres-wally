@@ -27,4 +27,4 @@ const CharacterDialog = ({ isOpen, onClose }) => {
   );
 };
 
-export default CharacterDialog;
+export { CharacterDialog };
