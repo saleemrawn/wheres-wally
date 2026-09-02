@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useGameStateUpdate } from "../context/game-state";
+import { Viewer } from "../features/viewer/viewer";
 import { TimerDisplay } from "../features/timer-display/timer-display";
 import { useTimerDisplay } from "../features/timer-display/use-timer-display";
 import { RoundsDisplay } from "../features/rounds-display/rounds-display";
@@ -18,6 +19,8 @@ const Game = () => {
 
   return (
     <>
+      <Viewer />
+
       <Flex className="bg-red-500">
         <TimerDisplay time={time} />
         <RoundsDisplay currentRound={currentRound} totalRounds={totalRounds} />
