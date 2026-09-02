@@ -10,18 +10,18 @@ import {
   Callout,
 } from "@radix-ui/themes";
 
-const CharacterItem = ({ characterName, imgToken, imgAlt }) => {
+const CharacterItem = ({ name, token, alt }) => {
   return (
     <Flex direction={"column"} justify={"center"} align={"center"} gap={"4"}>
       <Box className="m-w-100">
-        <img src={CHARACTER_ASSETS[imgToken]} alt={imgAlt} />
+        <img src={CHARACTER_ASSETS[token]} alt={alt} />
       </Box>
-      <Text>{characterName}</Text>
+      <Text>{name}</Text>
     </Flex>
   );
 };
 
-const CharacterList = ({ onCharacterClick }) => {
+const CharacterList = ({ onSelect }) => {
   const { characters, isLoading, error } = useCharacter();
 
   if (characters?.length === 0) {
@@ -40,15 +40,15 @@ const CharacterList = ({ onCharacterClick }) => {
       <RadioCards.Root
         variant="surface"
         columns={{ initial: "1", sm: "3", lg: "5" }}
-        onValueChange={onCharacterClick}
+        onValueChange={onSelect}
       >
         {characters?.map((character) => (
           <Skeleton loading={isLoading} key={character.id}>
             <RadioCards.Item value={character.id}>
               <CharacterItem
-                characterName={character.name}
-                imgToken={character.imageToken}
-                imgAlt={character.name}
+                name={character.name}
+                token={character.imageToken}
+                alt={character.name}
               />
             </RadioCards.Item>
           </Skeleton>
