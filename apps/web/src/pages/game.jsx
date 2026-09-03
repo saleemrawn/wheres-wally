@@ -3,6 +3,7 @@ import { useGameStateUpdate } from "../context/game-state";
 import { Viewer } from "../features/viewer/viewer";
 import { CharacterDialog } from "../features/character-select/character-dialog";
 import { CharacterList } from "../features/character-select/character-list";
+import { useValidateCharacter } from "../features/character-select/use-character";
 import { TimerDisplay } from "../features/timer-display/timer-display";
 import { useTimerDisplay } from "../features/timer-display/use-timer-display";
 import { RoundsDisplay } from "../features/rounds-display/rounds-display";
@@ -24,10 +25,26 @@ const Game = () => {
     y: null,
   });
 
+  const {
+    isLoading: isValidateCharacterLoading,
+    error: errorValidateCharacter,
+    validate,
+  } = useValidateCharacter();
+
   useEffect(() => {
     setGameRunning(true);
     startTimer();
   }, []);
+
+  const handleCharacterSubmit = () => {
+    validate({
+      coordinates: selectedCoordinates,
+      characterId: selectedCharacter,
+      illustrationId: image?.id,
+    });
+
+    closeDialog();
+  };
 
   return (
     <>
@@ -46,7 +63,11 @@ const Game = () => {
         <RoundsDisplay currentRound={currentRound} totalRounds={totalRounds} />
       </Flex>
 
-      <CharacterDialog isOpen={isOpen} onClose={closeDialog}>
+      <CharacterDialog
+        isOpen={isOpen}
+        onClose={closeDialog}
+        onSubmit={handleCharacterSubmit}
+      >
         <CharacterList onSelect={setSelectedCharacter} />
       </CharacterDialog>
     </>

@@ -7,4 +7,18 @@ const getCharacters = async () => {
   return res.data;
 };
 
-export { getCharacters };
+const validateCharacter = async ({
+  coordinates,
+  characterId,
+  illustrationId,
+}) => {
+  const res = await api.post(`${basePath}/validate`, {
+    coordinates,
+    characterId,
+    illustrationId,
+  });
+
+  return res.data;
+};
+
+export { getCharacters, validateCharacter };
