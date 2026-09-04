@@ -43,7 +43,7 @@ const CharacterList = ({ onSelect, completed }) => {
         onValueChange={onSelect}
       >
         {characters?.map((character) => {
-          const isCompleted = completed.includes(character.id);
+          const isCompleted = completed.has(character.id);
           return (
             <Skeleton loading={isLoading} key={character.id}>
               <RadioCards.Item value={character.id} disabled={isCompleted}>

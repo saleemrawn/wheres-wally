@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 const useCompletedCharacters = () => {
-  const [completed, setCompleted] = useState([]);
+  const [completed, setCompleted] = useState(new Set());
 
   const addCompleted = (characterId) => {
     if (characterId === null) return;
-    setCompleted((prev) => [...prev, characterId]);
+    setCompleted((prev) => new Set([...prev, characterId]));
   };
 
   return { completed, addCompleted };
