@@ -32,7 +32,7 @@ const Game = () => {
     validate,
   } = useValidateCharacter();
 
-  const { completed, addCompleted } = useCompletedCharacters();
+  const { completedIds, addCompletedId } = useCompletedCharacters();
 
   useEffect(() => {
     setGameRunning(true);
@@ -46,7 +46,7 @@ const Game = () => {
       illustrationId: image?.id,
     });
 
-    if (validatedId) addCompleted(validatedId);
+    if (validatedId) addCompletedId(validatedId);
 
     closeDialog();
   };
@@ -73,7 +73,10 @@ const Game = () => {
         onClose={closeDialog}
         onSubmit={handleValidate}
       >
-        <CharacterList completed={completed} onSelect={setSelectedCharacter} />
+        <CharacterList
+          completedIds={completedIds}
+          onSelect={setSelectedCharacter}
+        />
       </CharacterDialog>
     </>
   );

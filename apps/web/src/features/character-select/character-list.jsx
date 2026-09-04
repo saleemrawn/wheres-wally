@@ -21,7 +21,7 @@ const CharacterItem = ({ name, token, alt, isCompleted }) => {
   );
 };
 
-const CharacterList = ({ onSelect, completed }) => {
+const CharacterList = ({ onSelect, completedIds }) => {
   const { characters, isLoading, error } = useCharacters();
 
   if (characters?.length === 0) {
@@ -43,7 +43,7 @@ const CharacterList = ({ onSelect, completed }) => {
         onValueChange={onSelect}
       >
         {characters?.map((character) => {
-          const isCompleted = completed.has(character.id);
+          const isCompleted = completedIds.has(character.id);
           return (
             <Skeleton loading={isLoading} key={character.id}>
               <RadioCards.Item value={character.id} disabled={isCompleted}>
