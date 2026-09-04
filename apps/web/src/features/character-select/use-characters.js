@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as service from "./character-service.js";
 
-const useCharacter = () => {
+const useCharacters = () => {
   const [characters, setCharacters] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -25,4 +25,4 @@ const useCharacter = () => {
   return { characters, isLoading, error };
 };
 
-export { useCharacter };
+export { useCharacters };
