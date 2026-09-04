@@ -3,7 +3,7 @@ import { useGameStateUpdate } from "../context/game-state";
 import { Viewer } from "../features/viewer/viewer";
 import { CharacterDialog } from "../features/character-select/character-dialog";
 import { CharacterList } from "../features/character-select/character-list";
-import { useValidateCharacter } from "../features/character-select/use-character";
+import { useValidateCharacter } from "../features/character-select/use-validate-character";
 import { TimerDisplay } from "../features/timer-display/timer-display";
 import { useTimerDisplay } from "../features/timer-display/use-timer-display";
 import { RoundsDisplay } from "../features/rounds-display/rounds-display";
