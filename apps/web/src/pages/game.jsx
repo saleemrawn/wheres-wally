@@ -73,7 +73,7 @@ const Game = () => {
         onClose={closeDialog}
         onSubmit={handleValidate}
       >
-        <CharacterList onSelect={setSelectedCharacter} />
+        <CharacterList completed={completed} onSelect={setSelectedCharacter} />
       </CharacterDialog>
     </>
   );

@@ -1,4 +1,4 @@
-import { useCharacter } from "./use-character";
+import { useCharacters } from "./use-characters";
 import { CHARACTER_ASSETS } from "./character-assets";
 import { Info } from "lucide-react";
 import {
@@ -10,10 +10,10 @@ import {
   Callout,
 } from "@radix-ui/themes";
 
-const CharacterItem = ({ name, token, alt }) => {
+const CharacterItem = ({ name, token, alt, isCompleted }) => {
   return (
     <Flex direction={"column"} justify={"center"} align={"center"} gap={"4"}>
-      <Box className="m-w-100">
+      <Box className={`m-w-100 ${isCompleted ? "opacity-30" : "opacity-100"}`}>
         <img src={CHARACTER_ASSETS[token]} alt={alt} />
       </Box>
       <Text>{name}</Text>
@@ -21,8 +21,8 @@ const CharacterItem = ({ name, token, alt }) => {
   );
 };
 
-const CharacterList = ({ onSelect }) => {
-  const { characters, isLoading, error } = useCharacter();
+const CharacterList = ({ onSelect, completed }) => {
+  const { characters, isLoading, error } = useCharacters();
 
   if (characters?.length === 0) {
     return (
@@ -42,17 +42,21 @@ const CharacterList = ({ onSelect }) => {
         columns={{ initial: "1", sm: "3", lg: "5" }}
         onValueChange={onSelect}
       >
-        {characters?.map((character) => (
-          <Skeleton loading={isLoading} key={character.id}>
-            <RadioCards.Item value={character.id}>
-              <CharacterItem
-                name={character.name}
-                token={character.imageToken}
-                alt={character.name}
-              />
-            </RadioCards.Item>
-          </Skeleton>
-        ))}
+        {characters?.map((character) => {
+          const isCompleted = completed.includes(character.id);
+          return (
+            <Skeleton loading={isLoading} key={character.id}>
+              <RadioCards.Item value={character.id} disabled={isCompleted}>
+                <CharacterItem
+                  name={character.name}
+                  token={character.imageToken}
+                  alt={character.name}
+                  isCompleted={isCompleted}
+                />
+              </RadioCards.Item>
+            </Skeleton>
+          );
+        })}
       </RadioCards.Root>
     </Flex>
   );
