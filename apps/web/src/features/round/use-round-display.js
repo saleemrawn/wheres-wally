@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useViewerImages } from "../viewer/use-viewer-images";
 
-const useRoundsDisplay = () => {
+const useRoundDisplay = () => {
   const { images } = useViewerImages();
   const [totalRounds, setTotalRounds] = useState();
   const [currentRound, setCurrentRound] = useState(1);
@@ -17,4 +17,4 @@ const useRoundsDisplay = () => {
   return { currentRound, totalRounds, updateCurrentRound };
 };
 
-export { useRoundsDisplay };
+export { useRoundDisplay };

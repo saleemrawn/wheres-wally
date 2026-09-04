@@ -7,8 +7,8 @@ import { useValidateCharacter } from "../features/character/use-validate-charact
 import { useCompletedCharacters } from "../features/character/use-completed-characters";
 import { TimerDisplay } from "../features/timer-display/timer-display";
 import { useTimerDisplay } from "../features/timer-display/use-timer-display";
-import { RoundsDisplay } from "../features/rounds-display/rounds-display";
-import { useRoundsDisplay } from "../features/rounds-display/use-rounds-display";
+import { RoundDisplay } from "../features/round/round-display";
+import { useRoundDisplay } from "../features/round/use-round-display";
 import { useViewer } from "../features/viewer/use-viewer";
 import { useDialog } from "../hooks/use-dialog";
 import { getSelectedCoordinates } from "../utils/coordinates";
@@ -17,7 +17,7 @@ import { Flex, Skeleton } from "@radix-ui/themes";
 const Game = () => {
   const { setGameRunning, setGameFinished } = useGameStateUpdate();
   const { time, startTimer, endTimer } = useTimerDisplay();
-  const { currentRound, totalRounds } = useRoundsDisplay();
+  const { currentRound, totalRounds } = useRoundDisplay();
   const { image, isLoading } = useViewer(currentRound);
   const { isOpen, openDialog, closeDialog } = useDialog();
   const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -65,7 +65,7 @@ const Game = () => {
 
       <Flex className="bg-red-500">
         <TimerDisplay time={time} />
-        <RoundsDisplay currentRound={currentRound} totalRounds={totalRounds} />
+        <RoundDisplay currentRound={currentRound} totalRounds={totalRounds} />
       </Flex>
 
       <CharacterDialog

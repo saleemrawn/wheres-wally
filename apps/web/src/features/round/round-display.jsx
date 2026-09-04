@@ -1,6 +1,6 @@
 import { Flex, Text } from "@radix-ui/themes";
 
-const RoundsDisplay = ({ currentRound, totalRounds }) => {
+const RoundDisplay = ({ currentRound, totalRounds }) => {
   return (
     <Flex
       direction={"column"}
@@ -16,4 +16,4 @@ const RoundsDisplay = ({ currentRound, totalRounds }) => {
   );
 };
 
-export { RoundsDisplay };
+export { RoundDisplay };
