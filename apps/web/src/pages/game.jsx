@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useGameStateUpdate } from "../context/game-state";
 import { Viewer } from "../features/viewer/viewer";
-import { CharacterDialog } from "../features/character-select/character-dialog";
-import { CharacterList } from "../features/character-select/character-list";
-import { useValidateCharacter } from "../features/character-select/use-validate-character";
-import { useCompletedCharacters } from "../features/character-select/use-completed-characters";
+import { CharacterDialog } from "../features/character/character-dialog";
+import { CharacterList } from "../features/character/character-list";
+import { useValidateCharacter } from "../features/character/use-validate-character";
+import { useCompletedCharacters } from "../features/character/use-completed-characters";
 import { TimerDisplay } from "../features/timer-display/timer-display";
 import { useTimerDisplay } from "../features/timer-display/use-timer-display";
 import { RoundsDisplay } from "../features/rounds-display/rounds-display";
