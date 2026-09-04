@@ -3,7 +3,6 @@ import toast from "react-hot-toast";
 import * as service from "./character-service.js";
 
 const useValidateCharacter = () => {
-  const [completedCharacters, setCompletedCharacters] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -17,15 +16,12 @@ const useValidateCharacter = () => {
       });
 
       if (!validation.success) {
-        return toast.error(validation?.message);
+        toast.error(validation?.message);
+        return null;
       }
 
-      setCompletedCharacters([
-        ...completedCharacters,
-        validation.data[0]?.characterId,
-      ]);
-
       toast.success(validation?.message);
+      return validation.data[0].characterId ?? null;
     } catch (error) {
       setError(error);
     } finally {
@@ -33,7 +29,7 @@ const useValidateCharacter = () => {
     }
   };
 
-  return { completedCharacters, isLoading, error, validate };
+  return { isLoading, error, validate };
 };
 
 export { useValidateCharacter };

@@ -4,6 +4,7 @@ import { Viewer } from "../features/viewer/viewer";
 import { CharacterDialog } from "../features/character-select/character-dialog";
 import { CharacterList } from "../features/character-select/character-list";
 import { useValidateCharacter } from "../features/character-select/use-validate-character";
+import { useCompletedCharacters } from "../features/character-select/use-completed-characters";
 import { TimerDisplay } from "../features/timer-display/timer-display";
 import { useTimerDisplay } from "../features/timer-display/use-timer-display";
 import { RoundsDisplay } from "../features/rounds-display/rounds-display";
@@ -31,17 +32,21 @@ const Game = () => {
     validate,
   } = useValidateCharacter();
 
+  const { completed, addCompleted } = useCompletedCharacters();
+
   useEffect(() => {
     setGameRunning(true);
     startTimer();
   }, []);
 
-  const handleCharacterSubmit = () => {
-    validate({
+  const handleValidate = async () => {
+    const validatedId = await validate({
       coordinates: selectedCoordinates,
       characterId: selectedCharacter,
       illustrationId: image?.id,
     });
+
+    if (validatedId) addCompleted(validatedId);
 
     closeDialog();
   };
@@ -66,7 +71,7 @@ const Game = () => {
       <CharacterDialog
         isOpen={isOpen}
         onClose={closeDialog}
-        onSubmit={handleCharacterSubmit}
+        onSubmit={handleValidate}
       >
         <CharacterList onSelect={setSelectedCharacter} />
       </CharacterDialog>
