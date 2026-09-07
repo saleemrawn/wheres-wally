@@ -6,7 +6,7 @@ const useRoundDisplay = () => {
   const [totalRounds, setTotalRounds] = useState();
   const [currentRound, setCurrentRound] = useState(1);
 
-  const updateCurrentRound = useCallback(() => {
+  const incrementCurrentRound = useCallback(() => {
     setCurrentRound((prev) => prev + 1);
   });
 
@@ -14,7 +14,7 @@ const useRoundDisplay = () => {
     setTotalRounds(images?.length);
   }, [images]);
 
-  return { currentRound, totalRounds, updateCurrentRound };
+  return { currentRound, totalRounds, incrementCurrentRound };
 };
 
 export { useRoundDisplay };
