@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useGameStateUpdate } from "../context/game-state";
 import { Viewer } from "../features/viewer/viewer";
 import { CharacterDialog } from "../features/character/character-dialog";
@@ -9,6 +9,7 @@ import { TimerDisplay } from "../features/timer-display/timer-display";
 import { useTimerDisplay } from "../features/timer-display/use-timer-display";
 import { RoundDisplay } from "../features/round/round-display";
 import { useRoundDisplay } from "../features/round/use-round-display";
+import { RoundCompleteDialog } from "../features/round/round-complete-dialog";
 import { useViewer } from "../features/viewer/use-viewer";
 import { useDialog } from "../hooks/use-dialog";
 import { getSelectedCoordinates } from "../utils/coordinates";
@@ -17,9 +18,15 @@ import { Flex, Skeleton } from "@radix-ui/themes";
 const Game = () => {
   const { setGameRunning, setGameFinished } = useGameStateUpdate();
   const { time, startTimer, endTimer } = useTimerDisplay();
-  const { currentRound, totalRounds } = useRoundDisplay();
-  const { image, isLoading } = useViewer(currentRound);
+  const { currentRound, totalRounds, incrementCurrentRound } =
+    useRoundDisplay();
+  const { image, isLoading, nextImage } = useViewer(currentRound);
   const { isOpen, openDialog, closeDialog } = useDialog();
+  const {
+    isOpen: isRoundCompleteDialogOpen,
+    openDialog: openRoundCompleteDialog,
+    closeDialog: closeRoundCompleteDialog,
+  } = useDialog();
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [selectedCoordinates, setSelectedCoordinates] = useState({
     x: null,
@@ -32,12 +39,23 @@ const Game = () => {
     validate,
   } = useValidateCharacter();
 
-  const { completedIds, addCompletedId } = useCompletedCharacters();
+  const { completedIds, addCompletedId, resetCompletedIds } =
+    useCompletedCharacters();
 
   useEffect(() => {
     setGameRunning(true);
     startTimer();
   }, []);
+
+  useEffect(() => {
+    handleRoundCheck();
+  }, [completedIds]);
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
+
+  const timeoutRef = useRef(null);
 
   const handleValidate = async () => {
     const validatedId = await validate({
@@ -49,6 +67,22 @@ const Game = () => {
     if (validatedId) addCompletedId(validatedId);
 
     closeDialog();
+  };
+
+  const handleRoundCheck = () => {
+    if (completedIds.size === 5 && currentRound !== totalRounds) {
+      openRoundCompleteDialog();
+    }
+  };
+
+  const handleNextRound = () => {
+    closeRoundCompleteDialog();
+
+    timeoutRef.current = setTimeout(() => {
+      incrementCurrentRound();
+      nextImage();
+      resetCompletedIds();
+    }, 300);
   };
 
   return (
@@ -78,6 +112,12 @@ const Game = () => {
           onSelect={setSelectedCharacter}
         />
       </CharacterDialog>
+
+      <RoundCompleteDialog
+        isOpen={isRoundCompleteDialogOpen}
+        currentRound={currentRound}
+        onNextRound={handleNextRound}
+      />
     </>
   );
 };

@@ -8,7 +8,11 @@ const useCompletedCharacters = () => {
     setCompletedIds((prev) => new Set([...prev, characterId]));
   };
 
-  return { completedIds, addCompletedId };
+  const resetCompletedIds = () => {
+    setCompletedIds(new Set());
+  };
+
+  return { completedIds, addCompletedId, resetCompletedIds };
 };
 
 export { useCompletedCharacters };

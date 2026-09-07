@@ -11,7 +11,9 @@ const useViewer = (currentRound) => {
     }
   }, [images]);
 
-  return { image, isLoading, error };
+  const nextImage = () => setImage(images[currentRound]);
+
+  return { image, isLoading, error, nextImage };
 };
 
 export { useViewer };
