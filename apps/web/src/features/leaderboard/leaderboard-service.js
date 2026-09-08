@@ -7,4 +7,9 @@ const getLeaderboard = async () => {
   return res.data;
 };
 
-export { getLeaderboard };
+const checkWithinTopTen = async (time) => {
+  const res = await api.get(`${basePath}/${time}`);
+  return res.data;
+};
+
+export { getLeaderboard, checkWithinTopTen };
