@@ -5,4 +5,13 @@ const getLeaderboard = async () => {
   return times;
 };
 
-export { getLeaderboard };
+const getRowTenTime = async () => {
+  const row = await prisma.leaderboard.findFirst({
+    orderBy: { time: "asc" },
+    skip: 9,
+  });
+
+  return row;
+};
+
+export { getLeaderboard, getRowTenTime };

@@ -9,4 +9,19 @@ const getLeaderboard = async (req, res, next) => {
   }
 };
 
-export { getLeaderboard };
+const isTopTenTime = async (req, res, next) => {
+  try {
+    const userTime = Number(req.params.time);
+    const row = await repository.getRowTenTime();
+
+    if (userTime > Number(row.time)) {
+      return res.status(200).json({ success: true, isTopTen: false });
+    }
+
+    res.status(200).json({ success: true, isTopTen: true });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { getLeaderboard, isTopTenTime };
