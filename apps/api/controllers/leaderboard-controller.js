@@ -14,11 +14,15 @@ const isTopTenTime = async (req, res, next) => {
     const userTime = Number(req.params.time);
     const row = await repository.getRowTenTime();
 
-    if (userTime > Number(row.time)) {
-      return res.status(200).json({ success: true, isTopTen: false });
+    if (!row) {
+      return res.status(200).json({ success: true, isTopTen: true, data: row });
     }
 
-    res.status(200).json({ success: true, isTopTen: true });
+    return res.status(200).json({
+      success: true,
+      isTopTen: userTime < Number(row.time),
+      data: row,
+    });
   } catch (error) {
     next(error);
   }
