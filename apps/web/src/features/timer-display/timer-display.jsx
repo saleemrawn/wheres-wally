@@ -1,8 +1,5 @@
+import { padZero } from "../../utils/timer";
 import { Button, Flex, Text } from "@radix-ui/themes";
-
-const format = (num) => {
-  return (num + "").length === 1 ? "0" + num : num + "";
-};
 
 const TimerDisplay = ({ time }) => {
   return (
@@ -16,13 +13,13 @@ const TimerDisplay = ({ time }) => {
       <Text className="font-sniglet text-white text-xl md:text-3xl">Time</Text>
       <Flex>
         <Text className="font-semibold text-white text-xl md:text-3xl">
-          {format(time.hh)}:
+          {padZero(time.hh)}:
         </Text>
         <Text className="font-semibold text-white text-xl md:text-3xl">
-          {format(time.mm)}:
+          {padZero(time.mm)}:
         </Text>
         <Text className="font-semibold text-white text-xl md:text-3xl">
-          {format(time.ss)}
+          {padZero(time.ss)}
         </Text>
       </Flex>
     </Flex>
