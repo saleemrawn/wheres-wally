@@ -153,12 +153,8 @@ const Game = () => {
         onNextRound={handleNextRound}
       />
 
-      <GameCompleteDialog
-        isOpen={isGameCompleteDialogOpen}
-        isTopTenTime={isTopTen}
-        finishTime={time}
-      >
-        <LeaderboardForm />
+      <GameCompleteDialog isOpen={isGameCompleteDialogOpen} finishTime={time}>
+        {isTopTen ? <LeaderboardForm /> : null}
       </GameCompleteDialog>
     </>
   );

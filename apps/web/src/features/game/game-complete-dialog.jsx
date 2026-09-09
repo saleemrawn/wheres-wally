@@ -2,13 +2,7 @@ import { Link } from "react-router";
 import { padZero } from "../../utils/timer";
 import { Button, Dialog, Flex, Text } from "@radix-ui/themes";
 
-const GameCompleteDialog = ({
-  isOpen,
-  isTopTenTime,
-  finishTime,
-  onPlayAgain,
-  children,
-}) => {
+const GameCompleteDialog = ({ isOpen, finishTime, onPlayAgain, children }) => {
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Content className="flex flex-col items-center gap-3 p-10!">
@@ -22,7 +16,7 @@ const GameCompleteDialog = ({
             </Text>
           </Dialog.Description>
 
-          {isTopTenTime ? children : null}
+          {children}
 
           <Flex gap={"2"} justify={"center"}>
             <Button onClick={onPlayAgain} size={"3"} className="bg-green-600!">
