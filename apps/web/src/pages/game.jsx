@@ -3,6 +3,7 @@ import { useGameStateUpdate } from "../context/game-state";
 import { Viewer } from "../features/viewer/viewer";
 import { CharacterDialog } from "../features/character/character-dialog";
 import { CharacterList } from "../features/character/character-list";
+import { useCharacters } from "../features/character/use-characters";
 import { useValidateCharacter } from "../features/character/use-validate-character";
 import { useCompletedCharacters } from "../features/character/use-completed-characters";
 import { TimerDisplay } from "../features/timer-display/timer-display";
@@ -27,11 +28,13 @@ const Game = () => {
     openDialog: openRoundCompleteDialog,
     closeDialog: closeRoundCompleteDialog,
   } = useDialog();
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
-  const [selectedCoordinates, setSelectedCoordinates] = useState({
-    x: null,
-    y: null,
-  });
+
+  const {
+    characters,
+    isLoading: isCharactersLoading,
+    error: charactersError,
+    getCharacterCount,
+  } = useCharacters();
 
   const {
     isLoading: isValidateCharacterLoading,
@@ -41,6 +44,12 @@ const Game = () => {
 
   const { completedIds, addCompletedId, resetCompletedIds } =
     useCompletedCharacters();
+
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [selectedCoordinates, setSelectedCoordinates] = useState({
+    x: null,
+    y: null,
+  });
 
   useEffect(() => {
     setGameRunning(true);
@@ -108,6 +117,7 @@ const Game = () => {
         onSubmit={handleValidate}
       >
         <CharacterList
+          characters={characters}
           completedIds={completedIds}
           onSelect={setSelectedCharacter}
         />
