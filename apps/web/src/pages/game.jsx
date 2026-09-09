@@ -57,6 +57,8 @@ const Game = () => {
     y: null,
   });
 
+  const timeoutRef = useRef(null);
+
   useEffect(() => {
     setGameRunning(true);
     startTimer();
@@ -69,8 +71,6 @@ const Game = () => {
   useEffect(() => {
     return () => clearTimeout(timeoutRef.current);
   }, []);
-
-  const timeoutRef = useRef(null);
 
   const handleValidate = async () => {
     const validatedId = await validate({
