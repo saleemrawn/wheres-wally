@@ -22,7 +22,13 @@ const Game = () => {
   const { currentRound, totalRounds, incrementCurrentRound } =
     useRoundDisplay();
   const { image, isLoading, nextImage } = useViewer(currentRound);
-  const { isOpen, openDialog, closeDialog } = useDialog();
+
+  const {
+    isOpen: isCharacterDialogOpen,
+    openDialog: openCharacterDialog,
+    closeDialog: closeCharacterDialog,
+  } = useDialog();
+
   const {
     isOpen: isRoundCompleteDialogOpen,
     openDialog: openRoundCompleteDialog,
@@ -75,7 +81,7 @@ const Game = () => {
 
     if (validatedId) addCompletedId(validatedId);
 
-    closeDialog();
+    closeCharacterDialog();
   };
 
   const handleRoundCheck = () => {
@@ -101,7 +107,7 @@ const Game = () => {
           token={image?.imageToken}
           onClick={(event) => {
             setSelectedCoordinates(getSelectedCoordinates(event));
-            openDialog();
+            openCharacterDialog();
           }}
         />
       </Skeleton>
@@ -112,8 +118,8 @@ const Game = () => {
       </Flex>
 
       <CharacterDialog
-        isOpen={isOpen}
-        onClose={closeDialog}
+        isOpen={isCharacterDialogOpen}
+        onClose={closeCharacterDialog}
         onSubmit={handleValidate}
       >
         <CharacterList
