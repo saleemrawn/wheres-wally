@@ -2,30 +2,22 @@ import { useCallback, useRef, useState } from "react";
 
 const useTimerDisplay = () => {
   const [time, setTime] = useState({ hh: 0, mm: 0, ss: 0, ms: 0, total: 0 });
+  const startTimeRef = useRef(null);
   const intervalRef = useRef(null);
 
   const startTimer = useCallback(() => {
     if (intervalRef.current) return;
+    startTimeRef.current = Date.now();
 
     intervalRef.current = setInterval(() => {
-      setTime((prev) => {
-        let { hh, mm, ss, ms, total } = prev;
-        total++;
-        ms++;
+      const elapsedMs = Date.now() - startTimeRef.current;
 
-        if (ms >= 100) {
-          ss++;
-          ms = 0;
-        }
-        if (ss >= 60) {
-          mm++;
-          ss = 0;
-        }
-        if (mm >= 60) {
-          hh++;
-          mm = 0;
-        }
-        return { hh, mm, ss, ms, total };
+      setTime({
+        hh: Math.floor(elapsedMs / 3600000),
+        mm: Math.floor((elapsedMs / 60000) % 60),
+        ss: Math.floor((elapsedMs / 1000) % 60),
+        ms: Math.floor((elapsedMs % 1000) / 10),
+        total: elapsedMs,
       });
     }, 10);
   }, []);
