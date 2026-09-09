@@ -18,11 +18,15 @@ const useCharacters = () => {
     }
   };
 
+  const getCharacterCount = () => {
+    return characters.length;
+  };
+
   useEffect(() => {
     getCharacters();
   }, []);
 
-  return { characters, isLoading, error };
+  return { characters, isLoading, error, getCharacterCount };
 };
 
 export { useCharacters };
