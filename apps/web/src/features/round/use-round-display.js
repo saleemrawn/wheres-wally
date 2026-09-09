@@ -6,15 +6,22 @@ const useRoundDisplay = () => {
   const [totalRounds, setTotalRounds] = useState();
   const [currentRound, setCurrentRound] = useState(1);
 
-  const incrementCurrentRound = useCallback(() => {
-    setCurrentRound((prev) => prev + 1);
-  });
-
   useEffect(() => {
     setTotalRounds(images?.length);
   }, [images]);
 
-  return { currentRound, totalRounds, incrementCurrentRound };
+  const incrementCurrentRound = useCallback(() => {
+    setCurrentRound((prev) => prev + 1);
+  });
+
+  const resetCurrentRound = () => setCurrentRound(1);
+
+  return {
+    currentRound,
+    totalRounds,
+    incrementCurrentRound,
+    resetCurrentRound,
+  };
 };
 
 export { useRoundDisplay };

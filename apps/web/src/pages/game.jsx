@@ -21,9 +21,15 @@ import { Flex, Skeleton } from "@radix-ui/themes";
 
 const Game = () => {
   const { setGameRunning, setGameFinished } = useGameStateUpdate();
-  const { time, startTimer, endTimer } = useTimerDisplay();
-  const { currentRound, totalRounds, incrementCurrentRound } =
-    useRoundDisplay();
+  const { time, startTimer, endTimer, resetTimer } = useTimerDisplay();
+
+  const {
+    currentRound,
+    totalRounds,
+    incrementCurrentRound,
+    resetCurrentRound,
+  } = useRoundDisplay();
+
   const { image, isLoading, nextImage } = useViewer(currentRound);
 
   const {
@@ -41,6 +47,7 @@ const Game = () => {
   const {
     isOpen: isGameCompleteDialogOpen,
     openDialog: openGameCompleteDialog,
+    closeDialog: closeGameCompleteDialog,
   } = useDialog();
 
   const {
@@ -118,6 +125,14 @@ const Game = () => {
     }, 300);
   };
 
+  const handlePlayAgain = () => {
+    resetCompletedIds();
+    resetCurrentRound();
+    resetTimer();
+    closeGameCompleteDialog();
+    startTimer();
+  };
+
   return (
     <>
       <Skeleton loading={isLoading}>
@@ -153,7 +168,11 @@ const Game = () => {
         onNextRound={handleNextRound}
       />
 
-      <GameCompleteDialog isOpen={isGameCompleteDialogOpen} finishTime={time}>
+      <GameCompleteDialog
+        isOpen={isGameCompleteDialogOpen}
+        finishTime={time}
+        onPlayAgain={handlePlayAgain}
+      >
         {isTopTen ? <LeaderboardForm /> : null}
       </GameCompleteDialog>
     </>

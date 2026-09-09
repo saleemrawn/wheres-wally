@@ -25,9 +25,15 @@ const useTimerDisplay = () => {
   const endTimer = useCallback(() => {
     clearInterval(intervalRef.current);
     intervalRef.current = null;
+    startTimeRef.current = null;
   }, []);
 
-  return { time, startTimer, endTimer };
+  const resetTimer = () => {
+    endTimer();
+    setTime({ hh: 0, mm: 0, ss: 0, ms: 0, total: 0 });
+  };
+
+  return { time, startTimer, endTimer, resetTimer };
 };
 
 export { useTimerDisplay };

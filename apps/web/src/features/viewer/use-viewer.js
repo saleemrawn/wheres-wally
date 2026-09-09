@@ -9,7 +9,7 @@ const useViewer = (currentRound) => {
     if (images && images.length > 0) {
       setImage(images[currentRound - 1]);
     }
-  }, [images]);
+  }, [images, currentRound]);
 
   const nextImage = () => setImage(images[currentRound]);
 
