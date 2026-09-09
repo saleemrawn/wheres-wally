@@ -11,6 +11,9 @@ import { useTimerDisplay } from "../features/timer-display/use-timer-display";
 import { RoundDisplay } from "../features/round/round-display";
 import { useRoundDisplay } from "../features/round/use-round-display";
 import { RoundCompleteDialog } from "../features/round/round-complete-dialog";
+import { GameCompleteDialog } from "../features/game/game-complete-dialog";
+import { LeaderboardForm } from "../features/leaderboard/leaderboard-form";
+import { useCheckTopTenTime } from "../features/leaderboard/use-check-top-ten-time";
 import { useViewer } from "../features/viewer/use-viewer";
 import { useDialog } from "../hooks/use-dialog";
 import { getSelectedCoordinates } from "../utils/coordinates";
@@ -36,6 +39,11 @@ const Game = () => {
   } = useDialog();
 
   const {
+    isOpen: isGameCompleteDialogOpen,
+    openDialog: openGameCompleteDialog,
+  } = useDialog();
+
+  const {
     characters,
     isLoading: isCharactersLoading,
     error: charactersError,
@@ -51,12 +59,20 @@ const Game = () => {
   const { completedIds, addCompletedId, resetCompletedIds } =
     useCompletedCharacters();
 
+  const {
+    isTopTen,
+    isLoading: isCheckTopTenLoading,
+    error: checkTopTenError,
+    checkWithinTopTen,
+  } = useCheckTopTenTime();
+
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [selectedCoordinates, setSelectedCoordinates] = useState({
     x: null,
     y: null,
   });
 
+  const totalCharacters = getCharacterCount();
   const timeoutRef = useRef(null);
 
   useEffect(() => {
@@ -65,8 +81,16 @@ const Game = () => {
   }, []);
 
   useEffect(() => {
-    handleRoundCheck();
-  }, [completedIds]);
+    if (!totalCharacters || completedIds.size !== totalCharacters) return;
+
+    if (currentRound === totalRounds) {
+      endTimer();
+      checkWithinTopTen(time.total);
+      openGameCompleteDialog();
+    } else {
+      openRoundCompleteDialog();
+    }
+  }, [completedIds, currentRound]);
 
   useEffect(() => {
     return () => clearTimeout(timeoutRef.current);
@@ -82,12 +106,6 @@ const Game = () => {
     if (validatedId) addCompletedId(validatedId);
 
     closeCharacterDialog();
-  };
-
-  const handleRoundCheck = () => {
-    if (completedIds.size === 5 && currentRound !== totalRounds) {
-      openRoundCompleteDialog();
-    }
   };
 
   const handleNextRound = () => {
@@ -134,6 +152,14 @@ const Game = () => {
         currentRound={currentRound}
         onNextRound={handleNextRound}
       />
+
+      <GameCompleteDialog
+        isOpen={isGameCompleteDialogOpen}
+        isTopTenTime={isTopTen}
+        finishTime={time}
+      >
+        <LeaderboardForm />
+      </GameCompleteDialog>
     </>
   );
 };
