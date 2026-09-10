@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { Flex, Button, TextField, Heading, Text } from "@radix-ui/themes";
 import { Form } from "radix-ui";
 
 const LeaderboardForm = ({ onSubmit }) => {
+  const [name, setName] = useState("");
+
   return (
     <Form.Root
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmit();
+        onSubmit(name);
       }}
       className="bg-gray-200 p-10 rounded-3xl"
     >
@@ -23,7 +26,13 @@ const LeaderboardForm = ({ onSubmit }) => {
               Please enter your name
             </Form.Message>
             <Form.Control asChild>
-              <TextField.Root size="3" className="w-full" required />
+              <TextField.Root
+                size="3"
+                className="w-full"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                required
+              />
             </Form.Control>
           </Flex>
         </Form.Field>
