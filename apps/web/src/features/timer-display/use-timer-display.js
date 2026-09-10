@@ -25,11 +25,11 @@ const useTimerDisplay = () => {
   const endTimer = useCallback(() => {
     clearInterval(intervalRef.current);
     intervalRef.current = null;
-    startTimeRef.current = null;
   }, []);
 
   const resetTimer = () => {
     endTimer();
+    startTimeRef.current = null;
     setTime({ hh: 0, mm: 0, ss: 0, ms: 0, total: 0 });
   };
 
