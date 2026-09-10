@@ -14,4 +14,9 @@ const getRowTenTime = async () => {
   return row;
 };
 
-export { getLeaderboard, getRowTenTime };
+const addLeaderboardTime = async ({ name, time }) => {
+  const data = await prisma.leaderboard.create({ data: { name, time } });
+  return data;
+};
+
+export { getLeaderboard, getRowTenTime, addLeaderboardTime };
