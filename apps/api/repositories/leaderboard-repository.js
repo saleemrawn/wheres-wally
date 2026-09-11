@@ -1,7 +1,10 @@
 import { prisma } from "../lib/prisma.js";
 
 const getLeaderboard = async () => {
-  const times = await prisma.leaderboard.findMany({ orderBy: { time: "asc" } });
+  const times = await prisma.leaderboard.findMany({
+    take: 10,
+    orderBy: { time: "asc" },
+  });
   return times;
 };
 
