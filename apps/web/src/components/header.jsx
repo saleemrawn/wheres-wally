@@ -6,8 +6,9 @@ import { Menu, X } from "lucide-react";
 import Logo from "../assets/logos/logo-text-only.png";
 
 const LogoLink = () => {
+  const { isRunning } = useGameState();
   return (
-    <Link to={"/"}>
+    <Link to={isRunning ? null : "/"}>
       <img src={Logo} alt="wheres wally" className="max-h-15" />
     </Link>
   );
