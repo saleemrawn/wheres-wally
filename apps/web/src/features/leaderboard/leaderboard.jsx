@@ -1,5 +1,5 @@
 import { useLeaderboard } from "./use-leaderboard";
-import { getOrdinalSuffix } from "../../utils/number";
+import { getOrdinalSuffix, formatTime } from "../../utils/number";
 import { Container, Heading, Table, Flex, Skeleton } from "@radix-ui/themes";
 
 const LeaderboardList = () => {
@@ -30,7 +30,7 @@ const LeaderboardList = () => {
               <Table.Row key={player?.id}>
                 <Table.Cell>{getOrdinalSuffix(index + 1)}</Table.Cell>
                 <Table.Cell>{player?.name}</Table.Cell>
-                <Table.Cell>{player?.time}</Table.Cell>
+                <Table.Cell>{formatTime(player?.time)}s</Table.Cell>
               </Table.Row>
             ))
           )}
