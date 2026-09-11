@@ -6,8 +6,8 @@ const leaderboardValidators = [
     .trim()
     .notEmpty()
     .withMessage("Name is required")
-    .isLength({ min: 2 })
-    .withMessage("Name must be minimum 2 letters")
+    .isLength({ min: 2, max: 15 })
+    .withMessage("Name must between 2 and 15 letters")
     .isAlpha(undefined, { ignore: " " })
     .withMessage("Name can only contain letters"),
   body("time")
