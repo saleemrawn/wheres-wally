@@ -17,4 +17,8 @@ const getOrdinalSuffix = (number) => {
   return number + "th";
 };
 
-export { getOrdinalSuffix };
+const padZero = (num) => {
+  return (num + "").length === 1 ? "0" + num : num + "";
+};
+
+export { getOrdinalSuffix, padZero };

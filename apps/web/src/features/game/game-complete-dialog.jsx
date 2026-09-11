@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { padZero } from "../../utils/timer";
+import { padZero } from "../../utils/number";
 import { Button, Dialog, Flex, Text } from "@radix-ui/themes";
 
 const GameCompleteDialog = ({ isOpen, finishTime, onPlayAgain, children }) => {
