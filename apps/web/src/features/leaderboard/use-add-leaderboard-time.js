@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getErrorDetails } from "../../utils/error.js";
 import toast from "react-hot-toast";
 import * as service from "./leaderboard-service.js";
 
@@ -12,13 +13,16 @@ const useAddLeaderboardTime = () => {
       const data = await service.addLeaderboardTime({ name, time });
       toast.success(data.message);
     } catch (error) {
-      setError(error);
+      const errDetails = getErrorDetails(error);
+      setError(errDetails);
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { isLoading, error, addLeaderboardTime };
+  const resetError = () => setError(null);
+
+  return { isLoading, error, addLeaderboardTime, resetError };
 };
 
 export { useAddLeaderboardTime };
