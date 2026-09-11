@@ -1,9 +1,18 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useGameState } from "../../context/game-state";
 
 const useTimerDisplay = () => {
+  const { isRunning } = useGameState();
   const [time, setTime] = useState({ hh: 0, mm: 0, ss: 0, ms: 0, total: 0 });
   const startTimeRef = useRef(null);
   const intervalRef = useRef(null);
+
+  useEffect(() => {
+    if (!isRunning) {
+      endTimer();
+      resetTimer();
+    }
+  }, [isRunning]);
 
   const startTimer = useCallback(() => {
     if (intervalRef.current) return;
