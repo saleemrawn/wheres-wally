@@ -14,6 +14,7 @@ import { RoundCompleteDialog } from "../features/round/round-complete-dialog";
 import { GameCompleteDialog } from "../features/game/game-complete-dialog";
 import { LeaderboardForm } from "../features/leaderboard/leaderboard-form";
 import { useCheckTopTenTime } from "../features/leaderboard/use-check-top-ten-time";
+import { useAddLeaderboardTime } from "../features/leaderboard/use-add-leaderboard-time";
 import { useViewer } from "../features/viewer/use-viewer";
 import { useDialog } from "../hooks/use-dialog";
 import { getSelectedCoordinates } from "../utils/coordinates";
@@ -65,6 +66,13 @@ const Game = () => {
 
   const { completedIds, addCompletedId, resetCompletedIds } =
     useCompletedCharacters();
+
+  const {
+    isLoading: isAddLeaderboardTimeLoading,
+    error: addLeaderboardTimeError,
+    addLeaderboardTime,
+    resetError,
+  } = useAddLeaderboardTime();
 
   const {
     isTopTen,
@@ -133,6 +141,10 @@ const Game = () => {
     startTimer();
   };
 
+  const handleLeaderboardSubmit = async (name) => {
+    await addLeaderboardTime({ name, time: time.total });
+  };
+
   return (
     <>
       <Skeleton loading={isLoading}>
@@ -173,7 +185,13 @@ const Game = () => {
         finishTime={time}
         onPlayAgain={handlePlayAgain}
       >
-        {isTopTen ? <LeaderboardForm /> : null}
+        {isTopTen ? (
+          <LeaderboardForm
+            errors={addLeaderboardTimeError?.errors}
+            onSubmit={handleLeaderboardSubmit}
+            onResetErrors={resetError}
+          />
+        ) : null}
       </GameCompleteDialog>
     </>
   );
