@@ -4,7 +4,7 @@ import { Box } from "@radix-ui/themes";
 const ViewerImage = ({ token }) => {
   return (
     <>
-      <img src={VIEWER_ASSETS[token]} />
+      <img src={VIEWER_ASSETS[token]} className="cursor-pointer" />
     </>
   );
 };
