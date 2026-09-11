@@ -1,4 +1,10 @@
-import { createContext, useCallback, useContext, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 const GameStateContext = createContext();
 const GameStateUpdateContext = createContext();
@@ -14,6 +20,12 @@ const useGameStateUpdate = () => {
 const GameStateProvider = ({ children }) => {
   const [isRunning, setIsRunning] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("popstate", () => {
+      setIsRunning(false);
+    });
+  }, []);
 
   const setGameRunning = useCallback((bool) => {
     setIsRunning(bool);

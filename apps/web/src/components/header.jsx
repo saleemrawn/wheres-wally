@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { useGameState } from "../context/game-state";
 import { Box, Button, Flex, Text } from "@radix-ui/themes";
 import { Menu, X } from "lucide-react";
 import Logo from "../assets/logos/logo-text-only.png";
@@ -13,6 +14,7 @@ const LogoLink = () => {
 };
 
 const Nav = () => {
+  const { isRunning } = useGameState();
   const [isOpen, setIsOpen] = useState(false);
 
   const links = [
@@ -21,6 +23,8 @@ const Nav = () => {
   ];
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
+
+  if (isRunning) return;
 
   return (
     <nav>
