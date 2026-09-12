@@ -7,5 +7,8 @@
   "scripts": {
     "dev:web": "npm run dev --workspace=apps/web",
     "dev:api": "npm run dev --workspace=apps/api"
+  },
+  "dependencies": {
+    "react-zoom-pan-pinch": "^4.2.0"
   }
 }
