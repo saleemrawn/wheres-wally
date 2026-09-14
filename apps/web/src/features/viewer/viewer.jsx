@@ -115,7 +115,6 @@ const Viewer = ({ token, onClick }) => {
           wasDragging.current = true;
         }}
         doubleClick={{ disabled: true }}
-        wheel={{ disabled: true }}
       >
         <CursorCoordinates
           mousePosition={mousePosition.current}
