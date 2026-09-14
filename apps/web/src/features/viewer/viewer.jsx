@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   TransformWrapper,
   TransformComponent,
   useControls,
+  useTransformComponent,
 } from "react-zoom-pan-pinch";
 import { VIEWER_ASSETS } from "./viewer-assets";
 import { Box, Button, Flex } from "@radix-ui/themes";
@@ -12,6 +13,19 @@ import {
   RotateCcw,
 } from "lucide-react";
 import "./viewer.css";
+
+const CursorCoordinates = ({ mousePosition, onMouseMove }) => {
+  const { scale, positionX, positionY } = useTransformComponent(
+    ({ state }) => state,
+  );
+
+  const contentX = (mousePosition?.x - positionX) / scale;
+  const contentY = (mousePosition?.y - positionY) / scale;
+
+  useEffect(() => {
+    onMouseMove({ x: contentX.toFixed(0), y: contentY.toFixed(0) });
+  }, [mousePosition]);
+};
 
 const ViewerControls = () => {
   const { zoomIn, zoomOut, resetTransform } = useControls();
@@ -66,7 +80,18 @@ const ViewerContainer = ({ children, onClick }) => {
 };
 
 const Viewer = ({ token, onClick }) => {
+  const defaultCoords = { x: 0, y: 0 };
+  const mousePosition = useRef(defaultCoords);
+  const coordinates = useRef(defaultCoords);
   const wasDragging = useRef(false);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mousePosition.current = {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    };
+  };
 
   return (
     <ViewerContainer
@@ -76,7 +101,7 @@ const Viewer = ({ token, onClick }) => {
           return;
         }
 
-        onClick(event);
+        onClick(coordinates.current);
       }}
     >
       <TransformWrapper
@@ -92,10 +117,18 @@ const Viewer = ({ token, onClick }) => {
         doubleClick={{ disabled: true }}
         wheel={{ disabled: true }}
       >
+        <CursorCoordinates
+          mousePosition={mousePosition.current}
+          onMouseMove={(event) => {
+            coordinates.current = event;
+          }}
+        />
         <ViewerControls />
-        <TransformComponent>
-          <img src={VIEWER_ASSETS[token]} className="cursor-pointer" />
-        </TransformComponent>
+        <Box onMouseMove={handleMouseMove} className="h-full">
+          <TransformComponent>
+            <img src={VIEWER_ASSETS[token]} className="cursor-pointer" />
+          </TransformComponent>
+        </Box>
       </TransformWrapper>
     </ViewerContainer>
   );

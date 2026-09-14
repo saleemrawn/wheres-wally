@@ -17,7 +17,6 @@ import { useCheckTopTenTime } from "../features/leaderboard/use-check-top-ten-ti
 import { useAddLeaderboardTime } from "../features/leaderboard/use-add-leaderboard-time";
 import { useViewer } from "../features/viewer/use-viewer";
 import { useDialog } from "../hooks/use-dialog";
-import { getSelectedCoordinates } from "../utils/coordinates";
 import { Flex, Skeleton } from "@radix-ui/themes";
 
 const Game = () => {
@@ -151,7 +150,7 @@ const Game = () => {
         <Viewer
           token={image?.imageToken}
           onClick={(event) => {
-            setSelectedCoordinates(getSelectedCoordinates(event));
+            setSelectedCoordinates(event);
             openCharacterDialog();
           }}
         />
