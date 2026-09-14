@@ -1,8 +1,16 @@
+import { useEffect } from "react";
+import { useGameStateUpdate } from "../context/game-state";
 import { Box, Button, Container, Flex, Heading, Text } from "@radix-ui/themes";
 import { Link } from "react-router";
 import WallyImage from "../assets/logos/logo-with-wally.png";
 
 const Home = () => {
+  const { setGameRunning } = useGameStateUpdate();
+
+  useEffect(() => {
+    setGameRunning(false);
+  }, []);
+
   return (
     <>
       <Container
