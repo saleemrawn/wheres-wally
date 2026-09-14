@@ -1,0 +1,27 @@
+.react-transform-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.react-transform-component {
+  height: 100%;
+  width: max-content;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.react-transform-component img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: none;
+}
+
+@media (min-width: 1199.98px) {
+  .react-transform-component {
+    height: fit-content;
+    width: fit-content;
+  }
+}
