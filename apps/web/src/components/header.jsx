@@ -9,7 +9,7 @@ const LogoLink = () => {
   const { isRunning } = useGameState();
   return (
     <Link to={isRunning ? null : "/"}>
-      <img src={Logo} alt="wheres wally" className="max-h-15" />
+      <img src={Logo} alt="wheres wally" className="max-h-8 lg:max-h-12" />
     </Link>
   );
 };
@@ -82,7 +82,7 @@ const Nav = () => {
 const Header = () => {
   return (
     <header className="bg-white shadow-xl z-1">
-      <Flex justify={"between"} align={"center"} p={"4"}>
+      <Flex justify={"between"} align={"center"} className="px-3 py-3 lg:py-4">
         <LogoLink />
         <Nav />
       </Flex>
