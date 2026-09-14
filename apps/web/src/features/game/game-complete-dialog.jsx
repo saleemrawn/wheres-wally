@@ -23,7 +23,9 @@ const GameCompleteDialog = ({ isOpen, finishTime, onPlayAgain, children }) => {
               Play Again?
             </Button>
             <Button size={"3"} asChild>
-              <Link to={"/leaderboard"}>View Leaderboard</Link>
+              <Link to={"/leaderboard"} replace={true}>
+                View Leaderboard
+              </Link>
             </Button>
           </Flex>
         </Flex>
