@@ -150,6 +150,11 @@ const Game = () => {
 
   return (
     <>
+      <Flex className="bg-blue-400 py-1  md:py-2">
+        <TimerDisplay time={time} />
+        <RoundDisplay currentRound={currentRound} totalRounds={totalRounds} />
+      </Flex>
+
       <Skeleton loading={isLoading}>
         <Viewer
           token={image?.imageToken}
@@ -160,11 +165,6 @@ const Game = () => {
           }}
         />
       </Skeleton>
-
-      <Flex className="bg-red-500">
-        <TimerDisplay time={time} />
-        <RoundDisplay currentRound={currentRound} totalRounds={totalRounds} />
-      </Flex>
 
       <CharacterDialog
         isOpen={isCharacterDialogOpen}

@@ -4,21 +4,20 @@ import { Button, Flex, Text } from "@radix-ui/themes";
 const TimerDisplay = ({ time }) => {
   return (
     <Flex
-      direction={"column"}
       justify={"center"}
       align={"center"}
-      py={{ initial: "2", xs: "4" }}
-      className="w-full border-r-2 border-r-white"
+      gap={"2"}
+      className="w-full border-r border-r-white"
     >
-      <Text className="font-sniglet text-white text-xl md:text-3xl">Time</Text>
+      <Text className="text-blue-950 md:text-xl">Time</Text>
       <Flex>
-        <Text className="font-semibold text-white text-xl md:text-3xl">
+        <Text className="font-bold text-blue-950 md:text-xl">
           {padZero(time.hh)}:
         </Text>
-        <Text className="font-semibold text-white text-xl md:text-3xl">
+        <Text className="font-bold text-blue-950 md:text-xl">
           {padZero(time.mm)}:
         </Text>
-        <Text className="font-semibold text-white text-xl md:text-3xl">
+        <Text className="font-bold text-blue-950 md:text-xl">
           {padZero(time.ss)}
         </Text>
       </Flex>
