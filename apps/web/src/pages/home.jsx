@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useGameStateUpdate } from "../context/game-state";
+import { useRoundDisplay } from "../features/round/use-round-display";
 import { Box, Button, Container, Flex, Heading, Text } from "@radix-ui/themes";
 import { Link } from "react-router";
 import WallyImage from "../assets/logos/logo-with-wally.png";
 
 const Home = () => {
   const { setGameRunning } = useGameStateUpdate();
+  const { totalRounds } = useRoundDisplay();
 
   useEffect(() => {
     setGameRunning(false);
@@ -38,15 +40,12 @@ const Home = () => {
             </Heading>
             <Text>
               <ul className="list-disc">
-                <li className="mb-2 md:mb-1">Play all 5 rounds</li>
+                <li className="mb-2 md:mb-1">Play all {totalRounds} rounds</li>
                 <li className="mb-2 md:mb-1">
                   Tag the photo & select a character from the popup
                 </li>
                 <li className="mb-2 md:mb-1">
                   Find all the characters in fastest possible time
-                </li>
-                <li>
-                  Submit your name if your time has made it into the top 10
                 </li>
               </ul>
             </Text>
