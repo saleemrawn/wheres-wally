@@ -17,6 +17,7 @@ import { useCheckTopTenTime } from "../features/leaderboard/use-check-top-ten-ti
 import { useAddLeaderboardTime } from "../features/leaderboard/use-add-leaderboard-time";
 import { useViewer } from "../features/viewer/use-viewer";
 import { useDialog } from "../hooks/use-dialog";
+import { useViewerTransform } from "../features/viewer/use-viewer-transform";
 import { Flex, Skeleton } from "@radix-ui/themes";
 
 const Game = () => {
@@ -80,6 +81,8 @@ const Game = () => {
     checkWithinTopTen,
   } = useCheckTopTenTime();
 
+  const { transformRef, resetViewer } = useViewerTransform();
+
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [selectedCoordinates, setSelectedCoordinates] = useState({
     x: null,
@@ -103,6 +106,7 @@ const Game = () => {
       openGameCompleteDialog();
     } else {
       openRoundCompleteDialog();
+      resetViewer();
     }
   }, [completedIds, currentRound]);
 
@@ -149,6 +153,7 @@ const Game = () => {
       <Skeleton loading={isLoading}>
         <Viewer
           token={image?.imageToken}
+          ref={transformRef}
           onClick={(event) => {
             setSelectedCoordinates(event);
             openCharacterDialog();

@@ -79,7 +79,7 @@ const ViewerContainer = ({ children, onClick }) => {
   );
 };
 
-const Viewer = ({ token, onClick }) => {
+const Viewer = ({ token, ref, onClick }) => {
   const defaultCoords = { x: 0, y: 0 };
   const mousePosition = useRef(defaultCoords);
   const coordinates = useRef(defaultCoords);
@@ -105,6 +105,7 @@ const Viewer = ({ token, onClick }) => {
       }}
     >
       <TransformWrapper
+        ref={ref}
         initialScale={1}
         minScale={1}
         limitToBounds={true}
@@ -122,7 +123,9 @@ const Viewer = ({ token, onClick }) => {
             coordinates.current = event;
           }}
         />
+
         <ViewerControls />
+
         <Box onMouseMove={handleMouseMove} className="h-full">
           <TransformComponent>
             <img src={VIEWER_ASSETS[token]} className="cursor-pointer" />
