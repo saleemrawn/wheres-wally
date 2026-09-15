@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import { Theme } from "@radix-ui/themes";
 import { App } from "./app.jsx";
 import { Home } from "./pages/home.jsx";
-import { Game } from "./pages/game.jsx";
+import { Game } from "./features/game/game.jsx";
 import { Leaderboard } from "./features/leaderboard/leaderboard.jsx";
 import "@radix-ui/themes/styles.css";
 import "./index.css";
