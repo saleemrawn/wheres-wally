@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useGameStateUpdate } from "../context/game-state";
 import { useRoundDisplay } from "../features/round/use-round-display";
+import { useCharacters } from "../features/character/use-characters";
 import { Box, Button, Container, Flex, Heading, Text } from "@radix-ui/themes";
 import { Link } from "react-router";
 import WallyImage from "../assets/logos/logo-with-wally.png";
@@ -8,6 +9,7 @@ import WallyImage from "../assets/logos/logo-with-wally.png";
 const Home = () => {
   const { setGameRunning } = useGameStateUpdate();
   const { totalRounds } = useRoundDisplay();
+  const { characters } = useCharacters();
 
   useEffect(() => {
     setGameRunning(false);
@@ -45,7 +47,20 @@ const Home = () => {
                   Tag the photo & select a character from the popup
                 </li>
                 <li className="mb-2 md:mb-1">
-                  Find all the characters in fastest possible time
+                  Find
+                  {characters.map((character, index) =>
+                    index !== characters.length - 1 ? (
+                      <Text key={character.id ?? index}>
+                        {" "}
+                        {character.name},{" "}
+                      </Text>
+                    ) : (
+                      <Text key={character?.id ?? index}>
+                        and {character.name}{" "}
+                      </Text>
+                    ),
+                  )}
+                  in the fastest possible time.
                 </li>
               </ul>
             </Text>
