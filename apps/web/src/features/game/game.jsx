@@ -18,6 +18,7 @@ import { useAddLeaderboardTime } from "../leaderboard/use-add-leaderboard-time";
 import { useViewer } from "../viewer/use-viewer";
 import { useDialog } from "../../hooks/use-dialog";
 import { useViewerTransform } from "../viewer/use-viewer-transform";
+import { useViewerMarkers } from "../viewer/use-viewer-markers";
 import { Flex, Skeleton } from "@radix-ui/themes";
 
 const Game = () => {
@@ -82,6 +83,7 @@ const Game = () => {
   } = useCheckTopTenTime();
 
   const { transformRef, resetViewer } = useViewerTransform();
+  const { markers, addMarker, resetMarkers } = useViewerMarkers();
 
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [selectedCoordinates, setSelectedCoordinates] = useState({
@@ -107,6 +109,7 @@ const Game = () => {
     } else {
       openRoundCompleteDialog();
       resetViewer();
+      resetMarkers();
     }
   }, [completedIds, currentRound]);
 
@@ -121,7 +124,10 @@ const Game = () => {
       illustrationId: image?.id,
     });
 
-    if (validatedId) addCompletedId(validatedId);
+    if (validatedId) {
+      addMarker(selectedCoordinates);
+      addCompletedId(validatedId);
+    }
 
     closeCharacterDialog();
   };
@@ -158,9 +164,10 @@ const Game = () => {
       <Skeleton loading={isLoading}>
         <Viewer
           token={image?.imageToken}
+          markers={markers}
           ref={transformRef}
-          onClick={(event) => {
-            setSelectedCoordinates(event);
+          onClick={(coords) => {
+            setSelectedCoordinates(coords);
             openCharacterDialog();
           }}
         />

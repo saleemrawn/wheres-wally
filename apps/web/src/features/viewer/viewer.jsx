@@ -11,6 +11,7 @@ import {
   ZoomIn as MagPlus,
   ZoomOut as MagMinus,
   RotateCcw,
+  Check,
 } from "lucide-react";
 import "./viewer.css";
 
@@ -25,6 +26,25 @@ const CursorCoordinates = ({ mousePosition, onMouseMove }) => {
   useEffect(() => {
     onMouseMove({ x: contentX.toFixed(0), y: contentY.toFixed(0) });
   }, [mousePosition]);
+};
+
+const ViewerMarker = ({ posX, posY }) => {
+  const x = posX - 20;
+  const y = posY - 20;
+
+  return (
+    <Flex
+      justify={"center"}
+      align={"center"}
+      className={
+        "absolute z-10 w-10 h-10 bg-green-600/80 border-2 border-white rounded-full shadow-3xl"
+      }
+      top={`${y}px`}
+      left={`${x}px`}
+    >
+      <Check className="text-white" />
+    </Flex>
+  );
 };
 
 const ViewerControls = () => {
@@ -79,10 +99,9 @@ const ViewerContainer = ({ children, onClick }) => {
   );
 };
 
-const Viewer = ({ token, ref, onClick }) => {
-  const defaultCoords = { x: 0, y: 0 };
-  const mousePosition = useRef(defaultCoords);
-  const coordinates = useRef(defaultCoords);
+const Viewer = ({ token, ref, markers, onClick }) => {
+  const mousePosition = useRef({ x: 0, y: 0 });
+  const lastClickCoords = useRef({ x: 0, y: 0 });
   const wasDragging = useRef(false);
 
   const handleMouseMove = (e) => {
@@ -93,42 +112,55 @@ const Viewer = ({ token, ref, onClick }) => {
     };
   };
 
-  return (
-    <ViewerContainer
-      onClick={(event) => {
-        if (wasDragging.current) {
-          wasDragging.current = false;
-          return;
-        }
+  const handleContainerClick = () => {
+    if (wasDragging.current) {
+      wasDragging.current = false;
+      return;
+    }
+    onClick(lastClickCoords.current);
+  };
 
-        onClick(coordinates.current);
-      }}
-    >
+  const handlePanningStart = () => {
+    wasDragging.current = false;
+  };
+
+  const handlePanning = () => {
+    wasDragging.current = true;
+  };
+
+  const handleCoordsChange = (coords) => {
+    lastClickCoords.current = coords;
+  };
+
+  return (
+    <ViewerContainer onClick={handleContainerClick} className="relative">
       <TransformWrapper
         ref={ref}
         initialScale={1}
         minScale={1}
         limitToBounds={true}
-        onPanningStart={() => {
-          wasDragging.current = false;
-        }}
-        onPanning={() => {
-          wasDragging.current = true;
-        }}
+        onPanningStart={handlePanningStart}
+        onPanning={handlePanning}
         doubleClick={{ disabled: true }}
       >
         <CursorCoordinates
           mousePosition={mousePosition.current}
-          onMouseMove={(event) => {
-            coordinates.current = event;
-          }}
+          onMouseMove={handleCoordsChange}
         />
 
         <ViewerControls />
 
-        <Box onMouseMove={handleMouseMove} className="h-full">
+        <Box onMouseMove={handleMouseMove} className="h-full relative">
           <TransformComponent>
-            <img src={VIEWER_ASSETS[token]} className="cursor-pointer" />
+            {markers.map((marker) => (
+              <ViewerMarker
+                key={marker.id}
+                posX={marker.coordinates.x}
+                posY={marker.coordinates.y}
+              />
+            ))}
+
+            <img src={VIEWER_ASSETS[token]} alt="" className="cursor-pointer" />
           </TransformComponent>
         </Box>
       </TransformWrapper>
