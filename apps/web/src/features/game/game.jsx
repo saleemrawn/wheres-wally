@@ -143,9 +143,11 @@ const Game = () => {
   };
 
   const handlePlayAgain = () => {
+    resetViewer();
     resetCompletedIds();
     resetCurrentRound();
     resetTimer();
+    resetMarkers();
     closeGameCompleteDialog();
     startTimer();
   };
