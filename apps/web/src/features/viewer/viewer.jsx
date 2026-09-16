@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import "./viewer.css";
 
+const MARKER_SIZE = 48;
+
 const CursorCoordinates = ({ mousePosition, onMouseMove }) => {
   const { scale, positionX, positionY } = useTransformComponent(
     ({ state }) => state,
@@ -29,16 +31,17 @@ const CursorCoordinates = ({ mousePosition, onMouseMove }) => {
 };
 
 const ViewerMarker = ({ posX, posY }) => {
-  const x = posX - 20;
-  const y = posY - 20;
+  const x = posX - MARKER_SIZE / 2;
+  const y = posY - MARKER_SIZE / 2;
 
   return (
     <Flex
       justify={"center"}
       align={"center"}
       className={
-        "absolute z-10 w-10 h-10 bg-green-600/80 border-3 border-white rounded-full shadow-xl/80"
+        "absolute z-10 bg-green-600/80 border-3 border-white rounded-full shadow-xl/80"
       }
+      style={{ width: `${MARKER_SIZE}px`, height: `${MARKER_SIZE}px` }}
       top={`${y}px`}
       left={`${x}px`}
     >
