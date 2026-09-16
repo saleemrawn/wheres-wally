@@ -138,6 +138,7 @@ const Viewer = ({ token, ref, markers, onClick }) => {
         ref={ref}
         initialScale={1}
         minScale={1}
+        maxScale={2}
         limitToBounds={true}
         onPanningStart={handlePanningStart}
         onPanning={handlePanning}
