@@ -37,12 +37,12 @@ const ViewerMarker = ({ posX, posY }) => {
       justify={"center"}
       align={"center"}
       className={
-        "absolute z-10 w-10 h-10 bg-green-600/80 border-2 border-white rounded-full shadow-3xl"
+        "absolute z-10 w-10 h-10 bg-green-600/80 border-3 border-white rounded-full shadow-xl/80"
       }
       top={`${y}px`}
       left={`${x}px`}
     >
-      <Check className="text-white" />
+      <Check strokeWidth={"3"} className="text-white" />
     </Flex>
   );
 };
