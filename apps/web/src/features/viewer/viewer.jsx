@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   TransformWrapper,
   TransformComponent,
@@ -87,12 +87,15 @@ const ViewerControls = () => {
   );
 };
 
-const ViewerContainer = ({ children, onClick }) => {
+const ViewerContainer = ({ children, isPanning, onClick }) => {
   return (
     <Box
       height={"100%"}
-      className="relative bg-white cursor-pointer overflow-hidden"
+      className="relative bg-white overflow-hidden"
       onClick={onClick}
+      style={{
+        cursor: isPanning ? "grabbing" : "pointer",
+      }}
     >
       {children}
     </Box>
@@ -100,6 +103,7 @@ const ViewerContainer = ({ children, onClick }) => {
 };
 
 const Viewer = ({ token, ref, markers, onClick }) => {
+  const [isPanning, setIsPanning] = useState(false);
   const mousePosition = useRef({ x: 0, y: 0 });
   const lastClickCoords = useRef({ x: 0, y: 0 });
   const wasDragging = useRef(false);
@@ -122,10 +126,15 @@ const Viewer = ({ token, ref, markers, onClick }) => {
 
   const handlePanningStart = () => {
     wasDragging.current = false;
+    setIsPanning(true);
   };
 
   const handlePanning = () => {
     wasDragging.current = true;
+  };
+
+  const handlePanningStop = () => {
+    setIsPanning(false);
   };
 
   const handleCoordsChange = (coords) => {
@@ -133,7 +142,11 @@ const Viewer = ({ token, ref, markers, onClick }) => {
   };
 
   return (
-    <ViewerContainer onClick={handleContainerClick} className="relative">
+    <ViewerContainer
+      onClick={handleContainerClick}
+      isPanning={isPanning}
+      className="relative"
+    >
       <TransformWrapper
         ref={ref}
         initialScale={1}
@@ -142,6 +155,7 @@ const Viewer = ({ token, ref, markers, onClick }) => {
         limitToBounds={true}
         onPanningStart={handlePanningStart}
         onPanning={handlePanning}
+        onPanningStop={handlePanningStop}
         doubleClick={{ disabled: true }}
       >
         <CursorCoordinates
