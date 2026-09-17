@@ -20,6 +20,7 @@ import { useDialog } from "../../hooks/use-dialog";
 import { useViewerTransform } from "../viewer/use-viewer-transform";
 import { useViewerMarkers } from "../viewer/use-viewer-markers";
 import { Flex, Skeleton } from "@radix-ui/themes";
+import { Loading } from "../../components/loading";
 
 const Game = () => {
   const { setGameRunning, setGameFinished } = useGameStateUpdate();
@@ -32,7 +33,11 @@ const Game = () => {
     resetCurrentRound,
   } = useRoundDisplay();
 
-  const { image, isLoading, nextImage } = useViewer(currentRound);
+  const {
+    image,
+    isLoading: isViewerLoading,
+    nextImage,
+  } = useViewer(currentRound);
 
   const {
     isOpen: isCharacterDialogOpen,
@@ -93,11 +98,14 @@ const Game = () => {
 
   const totalCharacters = getCharacterCount();
   const timeoutRef = useRef(null);
+  const isLoading = isViewerLoading;
 
   useEffect(() => {
-    setGameRunning(true);
-    startTimer();
-  }, []);
+    if (!isLoading) {
+      setGameRunning(true);
+      startTimer();
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     if (!totalCharacters || completedIds.size !== totalCharacters) return;
@@ -158,22 +166,22 @@ const Game = () => {
 
   return (
     <>
+      <Loading isLoading={isLoading} />
+
       <Flex className="bg-blue-400 py-1  md:py-2">
         <TimerDisplay time={time} />
         <RoundDisplay currentRound={currentRound} totalRounds={totalRounds} />
       </Flex>
 
-      <Skeleton loading={isLoading}>
-        <Viewer
-          token={image?.imageToken}
-          markers={markers}
-          ref={transformRef}
-          onClick={(coords) => {
-            setSelectedCoordinates(coords);
-            openCharacterDialog();
-          }}
-        />
-      </Skeleton>
+      <Viewer
+        token={image?.imageToken}
+        markers={markers}
+        ref={transformRef}
+        onClick={(coords) => {
+          setSelectedCoordinates(coords);
+          openCharacterDialog();
+        }}
+      />
 
       <CharacterDialog
         isOpen={isCharacterDialogOpen}
