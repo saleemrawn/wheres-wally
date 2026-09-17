@@ -66,7 +66,7 @@ const ViewerControls = () => {
         }}
         className="bg-white! w-12! h-12! shadow-xl/60!"
       >
-        <MagPlus className="text-red-600" />
+        <MagPlus className="text-black" />
       </Button>
       <Button
         onClick={(event) => {
@@ -75,7 +75,7 @@ const ViewerControls = () => {
         }}
         className="bg-white! w-12! h-12! shadow-xl/60!"
       >
-        <MagMinus className="text-red-600" />
+        <MagMinus className="text-black" />
       </Button>
       <Button
         onClick={(event) => {
@@ -84,7 +84,7 @@ const ViewerControls = () => {
         }}
         className="bg-white! w-12! h-12! shadow-xl/60!"
       >
-        <RotateCcw className="text-red-600" />
+        <RotateCcw className="text-black" />
       </Button>
     </Flex>
   );
