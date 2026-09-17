@@ -33,7 +33,11 @@ const Home = () => {
           className="bg-white rounded-4xl shadow-xl"
         >
           <Box>
-            <img src={WallyImage} alt="where's wally" className="max-h-64" />
+            <img
+              src={WallyImage}
+              alt="where's wally"
+              className="max-h-32 md:max-h-64"
+            />
           </Box>
 
           <Box>
