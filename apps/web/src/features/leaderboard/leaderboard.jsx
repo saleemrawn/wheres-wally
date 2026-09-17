@@ -29,8 +29,6 @@ const LeaderboardList = () => {
               <Table.Cell colSpan={"3"}>
                 No players yet — be the first!
               </Table.Cell>
-              <Table.Cell></Table.Cell>
-              <Table.Cell></Table.Cell>
             </Table.Row>
           ) : (
             leaderboard.map((player, index) => (
