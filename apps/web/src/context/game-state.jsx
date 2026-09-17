@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const GameStateContext = createContext();
 const GameStateUpdateContext = createContext();
@@ -27,13 +21,13 @@ const GameStateProvider = ({ children }) => {
     });
   }, []);
 
-  const setGameRunning = useCallback((bool) => {
+  const setGameRunning = (bool) => {
     setIsRunning(bool);
-  }, []);
+  };
 
-  const setGameFinished = useCallback((bool) => {
+  const setGameFinished = (bool) => {
     setIsFinished(bool);
-  }, []);
+  };
 
   return (
     <GameStateContext value={{ isRunning, isFinished }}>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useViewerImages } from "../viewer/use-viewer-images";
 
 const useRoundDisplay = () => {
@@ -10,9 +10,9 @@ const useRoundDisplay = () => {
     setTotalRounds(images?.length);
   }, [images]);
 
-  const incrementCurrentRound = useCallback(() => {
+  const incrementCurrentRound = () => {
     setCurrentRound((prev) => prev + 1);
-  });
+  };
 
   const resetCurrentRound = () => setCurrentRound(1);
 
