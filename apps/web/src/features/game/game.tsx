@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useGameStateUpdate } from "../../context/game-state";
+import { useGameStateUpdate } from "../../context/game-state.tsx";
 import { Viewer } from "../viewer/viewer";
 import { CharacterDialog } from "../character/character-dialog";
 import { CharacterList } from "../character/character-list";

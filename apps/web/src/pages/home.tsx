@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useGameStateUpdate } from "../context/game-state.jsx";
+import { useGameStateUpdate } from "../context/game-state.tsx";
 import { useRoundDisplay } from "../features/round/use-round-display.jsx";
 import { useCharacters } from "../features/character/use-characters.jsx";
 import { Box, Button, Container, Flex, Heading, Text } from "@radix-ui/themes";

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useGameState } from "../../context/game-state";
+import { useGameState } from "../../context/game-state.tsx";
 
 const useTimerDisplay = () => {
   const { isRunning } = useGameState();

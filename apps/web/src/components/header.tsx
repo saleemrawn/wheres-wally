@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { useGameState } from "../context/game-state";
+import { useGameState } from "../context/game-state.tsx";
 import { Button, Flex } from "@radix-ui/themes";
 import { Menu, X } from "lucide-react";
 import Logo from "../assets/logos/logo-text-only.png";

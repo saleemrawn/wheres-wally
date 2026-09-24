@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useGameStateUpdate } from "../../context/game-state";
+import { useGameStateUpdate } from "../../context/game-state.tsx";
 import { useLeaderboard } from "./use-leaderboard";
 import { getOrdinalSuffix, formatTime } from "../../utils/number";
 import { Container, Heading, Table, Flex, Skeleton } from "@radix-ui/themes";
