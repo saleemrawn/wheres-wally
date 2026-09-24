@@ -20,7 +20,7 @@ import { useDialog } from "../../hooks/use-dialog";
 import { useViewerTransform } from "../viewer/use-viewer-transform";
 import { useViewerMarkers } from "../viewer/use-viewer-markers";
 import { Flex, Skeleton } from "@radix-ui/themes";
-import { Loading } from "../../components/loading";
+import { Loading } from "../../components/loading.tsx";
 
 const Game = () => {
   const { setGameRunning, setGameFinished } = useGameStateUpdate();
