@@ -5,10 +5,12 @@ type LoadingProps = { isLoading: boolean };
 
 const Loading = ({ isLoading }: LoadingProps) => {
   const [visible, setVisible] = useState(true);
-  const timerRef = useRef(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    clearTimeout(timerRef.current);
+    if (timerRef.current !== null) {
+      clearTimeout(timerRef.current);
+    }
 
     if (!isLoading) {
       timerRef.current = setTimeout(() => {
@@ -16,7 +18,11 @@ const Loading = ({ isLoading }: LoadingProps) => {
       }, 400);
     }
 
-    return () => clearTimeout(timerRef.current);
+    return () => {
+      if (timerRef.current !== null) {
+        clearTimeout(timerRef.current);
+      }
+    };
   }, [isLoading]);
 
   return (
