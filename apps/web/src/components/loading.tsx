@@ -1,7 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import { Box } from "@radix-ui/themes";
 
-const Loading = ({ isLoading }) => {
+type LoadingProps = { isLoading: boolean };
+
+const Loading = ({ isLoading }: LoadingProps) => {
   const [visible, setVisible] = useState(true);
   const timerRef = useRef(null);
 
