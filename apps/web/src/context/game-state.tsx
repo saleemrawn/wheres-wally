@@ -1,17 +1,53 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 
-const GameStateContext = createContext();
-const GameStateUpdateContext = createContext();
+interface GameStateProviderProps {
+  children: ReactNode;
+}
+
+interface GameState {
+  isRunning: boolean;
+  isFinished: boolean;
+}
+
+interface GameStateUpdate {
+  setGameRunning: (isRunning: boolean) => void;
+  setGameFinished: (isFinished: boolean) => void;
+}
+
+const GameStateContext = createContext<GameState | undefined>(undefined);
+const GameStateUpdateContext = createContext<GameStateUpdate | undefined>(
+  undefined,
+);
 
 const useGameState = () => {
-  return useContext(GameStateContext);
+  const context = useContext(GameStateContext);
+
+  if (context === undefined) {
+    throw new Error("useGameState must be used within a GameStateProvider");
+  }
+
+  return context;
 };
 
 const useGameStateUpdate = () => {
-  return useContext(GameStateUpdateContext);
+  const context = useContext(GameStateUpdateContext);
+
+  if (context === undefined) {
+    throw new Error(
+      "useGameStateUpdate must be used within a GameStateProvider",
+    );
+  }
+
+  return context;
 };
 
-const GameStateProvider = ({ children }) => {
+const GameStateProvider = ({ children }: GameStateProviderProps) => {
   const [isRunning, setIsRunning] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
