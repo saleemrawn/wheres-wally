@@ -8,7 +8,7 @@ import Logo from "../assets/logos/logo-text-only.png";
 const LogoLink = () => {
   const { isRunning } = useGameState();
   return (
-    <Link to={isRunning ? null : "/"}>
+    <Link to={isRunning ? "#" : "/"}>
       <img src={Logo} alt="wheres wally" className="max-h-8 lg:max-h-12" />
     </Link>
   );
