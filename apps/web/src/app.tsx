@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 import { Toaster, ToastBar } from "react-hot-toast";
 import { GameStateProvider } from "./context/game-state";
 import { Header } from "./components/header.tsx";
-import { Footer } from "./components/footer";
+import { Footer } from "./components/footer.tsx";
 
 const App = () => {
   return (
