@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { useGameState } from "../context/game-state";
-import { Box, Button, Flex } from "@radix-ui/themes";
+import { Button, Flex } from "@radix-ui/themes";
 import { Menu, X } from "lucide-react";
 import Logo from "../assets/logos/logo-text-only.png";
 
@@ -43,11 +43,11 @@ const Nav = () => {
 
       {isOpen ? (
         <>
-          <Box display={{ initial: "flex", lg: "none" }}>
+          <Flex display={{ initial: "flex", lg: "none" }}>
             <Button variant="outline" size={"3"} mb={"1"} onClick={toggleMenu}>
               <X size={24} strokeWidth={1} />
             </Button>
-          </Box>
+          </Flex>
 
           <Flex
             direction={"column"}
@@ -69,11 +69,11 @@ const Nav = () => {
           </Flex>
         </>
       ) : (
-        <Box display={{ initial: "flex", lg: "none" }}>
+        <Flex display={{ initial: "flex", lg: "none" }}>
           <Button variant="outline" size={"3"} mb={"1"} onClick={toggleMenu}>
             <Menu size={24} strokeWidth={1} />
           </Button>
-        </Box>
+        </Flex>
       )}
     </nav>
   );
