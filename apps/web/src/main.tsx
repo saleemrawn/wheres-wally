@@ -5,7 +5,7 @@ import { Theme } from "@radix-ui/themes";
 import { App } from "./app.tsx";
 import { Home } from "./pages/home.jsx";
 import { Game } from "./features/game/game.tsx";
-import { Leaderboard } from "./features/leaderboard/leaderboard.jsx";
+import { Leaderboard } from "./features/leaderboard/leaderboard.tsx";
 import "@radix-ui/themes/styles.css";
 import "./index.css";
 
