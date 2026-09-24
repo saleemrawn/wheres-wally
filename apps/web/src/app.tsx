@@ -1,4 +1,4 @@
-import { Grid, Heading } from "@radix-ui/themes";
+import { Grid } from "@radix-ui/themes";
 import { Outlet } from "react-router";
 import { Toaster, ToastBar } from "react-hot-toast";
 import { GameStateProvider } from "./context/game-state";
