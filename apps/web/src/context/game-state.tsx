@@ -57,12 +57,12 @@ const GameStateProvider = ({ children }: GameStateProviderProps) => {
     });
   }, []);
 
-  const setGameRunning = (bool) => {
-    setIsRunning(bool);
+  const setGameRunning = (isRunning: boolean) => {
+    setIsRunning(isRunning);
   };
 
-  const setGameFinished = (bool) => {
-    setIsFinished(bool);
+  const setGameFinished = (isFinished: boolean) => {
+    setIsFinished(isFinished);
   };
 
   return (
