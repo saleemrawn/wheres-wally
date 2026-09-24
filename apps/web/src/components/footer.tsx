@@ -1,6 +1,5 @@
-import { useEffect } from "react";
 import { useGameState } from "../context/game-state";
-import { Flex, Box, Text } from "@radix-ui/themes";
+import { Flex, Box } from "@radix-ui/themes";
 import Logo from "../assets/logos/logo-text-only.png";
 
 const Footer = () => {
