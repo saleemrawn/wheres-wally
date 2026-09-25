@@ -2,7 +2,27 @@ import { CHARACTER_ASSETS } from "./character-assets";
 import { Info } from "lucide-react";
 import { Box, Flex, Text, RadioCards, Callout } from "@radix-ui/themes";
 
-const CharacterItem = ({ name, token, alt, isCompleted }) => {
+type CharacterToken = keyof typeof CHARACTER_ASSETS;
+
+interface CharacterItemProps {
+  name: string;
+  token: CharacterToken;
+  alt: string;
+  isCompleted: boolean;
+}
+
+interface CharacterListProps {
+  characters: { id: number; name: string; imageToken: CharacterToken }[];
+  onSelect: (value: string) => void;
+  completedIds: Set<number>;
+}
+
+const CharacterItem = ({
+  name,
+  token,
+  alt,
+  isCompleted,
+}: CharacterItemProps) => {
   return (
     <Flex direction={"column"} justify={"center"} align={"center"} gap={"4"}>
       <Box className={`m-w-100 ${isCompleted ? "opacity-30" : "opacity-100"}`}>
@@ -13,7 +33,11 @@ const CharacterItem = ({ name, token, alt, isCompleted }) => {
   );
 };
 
-const CharacterList = ({ characters, onSelect, completedIds }) => {
+const CharacterList = ({
+  characters,
+  onSelect,
+  completedIds,
+}: CharacterListProps) => {
   if (characters?.length === 0) {
     return (
       <Callout.Root color="red" className="w-full">
