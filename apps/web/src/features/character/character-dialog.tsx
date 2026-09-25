@@ -1,8 +1,21 @@
+import { type MouseEvent, type ReactNode } from "react";
 import { Dialog, Button, Flex } from "@radix-ui/themes";
 import { Form } from "radix-ui";
 import { X } from "lucide-react";
 
-const CharacterDialog = ({ isOpen, onClose, onSubmit, children }) => {
+interface CharacterDialogProps {
+  isOpen: boolean;
+  onClose: (event: MouseEvent<HTMLButtonElement>) => void;
+  onSubmit: () => void;
+  children: ReactNode;
+}
+
+const CharacterDialog = ({
+  isOpen,
+  onClose,
+  onSubmit,
+  children,
+}: CharacterDialogProps) => {
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Content className="max-w-240! p-10!">
