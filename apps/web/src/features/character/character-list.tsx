@@ -61,7 +61,7 @@ const CharacterList = ({
           return (
             <RadioCards.Item
               key={character.id}
-              value={character.id}
+              value={String(character.id)}
               disabled={isCompleted}
             >
               <CharacterItem
