@@ -1,12 +1,6 @@
-import type { Character } from "./character-types.js";
+import type { Character, ValidateParams } from "./character-types.js";
 import type { ApiResponse } from "../../lib/api-types.js";
 import api from "../../lib/api.js";
-
-interface ValidateParams {
-  coordinates: { x: number; y: number };
-  characterId: number;
-  illustrationId: number;
-}
 
 interface ValidateData {
   characterId: number;

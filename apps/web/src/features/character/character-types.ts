@@ -4,4 +4,10 @@ interface Character {
   imageToken: string;
 }
 
-export { type Character };
+interface ValidateParams {
+  coordinates: { x: number; y: number };
+  characterId: number;
+  illustrationId: number;
+}
+
+export type { Character, ValidateParams };
