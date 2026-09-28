@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import type { Character } from "./character-types.js";
 import * as service from "./character-service.js";
 
 const useCharacters = () => {
-  const [characters, setCharacters] = useState([]);
+  const [characters, setCharacters] = useState<Character[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
