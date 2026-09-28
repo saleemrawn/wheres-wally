@@ -6,7 +6,6 @@ const useCompletedCharacters = () => {
   const [completedIds, setCompletedIds] = useState<TCompletedIds>(new Set());
 
   const addCompletedId = (characterId: number) => {
-    if (characterId === null) return;
     setCompletedIds((prev) => new Set([...prev, characterId]));
   };
 
