@@ -1,43 +1,44 @@
+import type { Character } from "./character-types.js";
+import type { ApiResponse } from "../../lib/api-types.js";
 import api from "../../lib/api.js";
 
-interface ValidateCharacterParams {
+interface ValidateParams {
   coordinates: { x: number; y: number };
   characterId: number;
   illustrationId: number;
 }
 
-interface Character {
+interface ValidateData {
+  characterId: number;
+  illustrationId: number;
   id: number;
-  name: string;
-  imageToken: string;
+  startX: number;
+  startY: number;
+  minX: number;
+  maxX: number;
+  maxY: number;
 }
 
-interface ValidateResponse {
-  success: boolean;
+interface ValidateResponse extends ApiResponse<ValidateData> {
   message: string;
-  data: {
-    characterId: number;
-    illustrationId: number;
-    id: number;
-    startX: number;
-    startY: number;
-    minX: number;
-    maxX: number;
-    maxY: number;
-  };
 }
+
+type CharactersResponse = ApiResponse<Character[]>;
 
 const basePath = "/characters";
 
-const getCharacters = async (): Promise<Character[]> => {
-  const res = await api.get<Character[]>(basePath);
+const getCharacters = async (): Promise<CharactersResponse> => {
+  const res = await api.get<CharactersResponse>(basePath);
   return res.data;
 };
 
 const validateCharacter = async (
-  params: ValidateCharacterParams,
+  params: ValidateParams,
 ): Promise<ValidateResponse> => {
-  const res = await api.post<ValidateResponse>(`${basePath}/validate`, params);
+  const res = await api.post<ValidateResponse, ValidateParams>(
+    `${basePath}/validate`,
+    params,
+  );
 
   return res.data;
 };
