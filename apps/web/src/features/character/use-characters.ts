@@ -14,11 +14,11 @@ const useCharacters = () => {
       const characters = await service.getCharacters();
       setCharacters(characters.data);
     } catch (error) {
-      if (error instanceof Error) {
-        setError(error);
-      } else {
-        setError(new Error("An unexpected error occurred"));
-      }
+      setError(
+        error instanceof Error
+          ? error
+          : new Error("An unexpected error occurred"),
+      );
     } finally {
       setIsLoading(false);
     }
