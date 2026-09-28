@@ -1,9 +1,11 @@
 import { useState } from "react";
 
-const useCompletedCharacters = () => {
-  const [completedIds, setCompletedIds] = useState(new Set());
+type TCompletedIds = Set<number>;
 
-  const addCompletedId = (characterId) => {
+const useCompletedCharacters = () => {
+  const [completedIds, setCompletedIds] = useState<TCompletedIds>(new Set());
+
+  const addCompletedId = (characterId: number) => {
     if (characterId === null) return;
     setCompletedIds((prev) => new Set([...prev, characterId]));
   };
