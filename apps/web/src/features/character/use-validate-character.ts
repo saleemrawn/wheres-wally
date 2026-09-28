@@ -18,7 +18,7 @@ const useValidateCharacter = () => {
       }
 
       toast.success(validation?.message);
-      return validation.data[0].characterId ?? null;
+      return validation.data.characterId ?? null;
     } catch (error) {
       setError(error);
     } finally {
