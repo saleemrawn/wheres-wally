@@ -68,13 +68,13 @@ const LeaderboardForm = ({
           </Flex>
         </Form.Field>
       </Flex>
-      <Form.Submit asChild>
-        <Flex justify={"center"}>
+      <Flex justify={"center"}>
+        <Form.Submit asChild>
           <Button type={"submit"} size={"3"} mt={"4"}>
             Add to Leaderboard
           </Button>
-        </Flex>
-      </Form.Submit>
+        </Form.Submit>
+      </Flex>
     </Form.Root>
   );
 };
