@@ -1,15 +1,21 @@
 import { useState } from "react";
-import {
-  Flex,
-  Button,
-  TextField,
-  Heading,
-  Text,
-  Callout,
-} from "@radix-ui/themes";
+import type { ValidationError } from "./leaderboard-types";
+import { Flex, Button, TextField, Heading, Callout } from "@radix-ui/themes";
 import { Form } from "radix-ui";
 
-const LeaderboardForm = ({ errors, onSubmit, onResetErrors }) => {
+type FormError = Pick<ValidationError, "msg">;
+
+interface LeaderboardFormProps {
+  errors: FormError[] | null;
+  onSubmit: (name: string) => void | Promise<void>;
+  onResetErrors: () => void;
+}
+
+const LeaderboardForm = ({
+  errors,
+  onSubmit,
+  onResetErrors,
+}: LeaderboardFormProps) => {
   const [name, setName] = useState("");
 
   return (
