@@ -1,8 +1,22 @@
+import type { ReactNode } from "react";
+import type { Time } from "./game-types";
 import { Link } from "react-router";
 import { padZero } from "../../utils/number";
 import { Button, Dialog, Flex, Text } from "@radix-ui/themes";
 
-const GameCompleteDialog = ({ isOpen, finishTime, onPlayAgain, children }) => {
+interface GameCompleteDialogProps {
+  isOpen: boolean;
+  finishTime: Pick<Time, "hh" | "mm" | "ss">;
+  onPlayAgain: () => void;
+  children?: ReactNode;
+}
+
+const GameCompleteDialog = ({
+  isOpen,
+  finishTime,
+  onPlayAgain,
+  children,
+}: GameCompleteDialogProps) => {
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Content className="flex flex-col items-center gap-3 p-10!">
@@ -11,8 +25,8 @@ const GameCompleteDialog = ({ isOpen, finishTime, onPlayAgain, children }) => {
           <Dialog.Description className="flex flex-col items-center gap-2">
             <Text>You completed the game in:</Text>
             <Text className="font-bold text-2xl">
-              {padZero(finishTime?.hh)}:{padZero(finishTime?.mm)}:
-              {padZero(finishTime?.ss)}
+              {padZero(finishTime.hh)}:{padZero(finishTime.mm)}:
+              {padZero(finishTime.ss)}
             </Text>
           </Dialog.Description>
 
