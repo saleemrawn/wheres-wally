@@ -9,6 +9,7 @@ const useAddLeaderboardTime = () => {
 
   const addLeaderboardTime = async ({ name, time }) => {
     setIsLoading(true);
+    setError(null);
     try {
       const data = await service.addLeaderboardTime({ name, time });
       toast.success(data.message);
