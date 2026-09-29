@@ -35,9 +35,9 @@ const LeaderboardForm = ({
 
         {errors ? (
           <Flex direction={"column"} gap={"3"}>
-            {errors.map((err) => {
+            {errors.map((err, index) => {
               return (
-                <Callout.Root color="red" size={"1"} key={err.msg}>
+                <Callout.Root color="red" size={"1"} key={index}>
                   <Callout.Text>{err.msg}</Callout.Text>
                 </Callout.Root>
               );
