@@ -49,9 +49,11 @@ const validateCharacter = async (req, res, next) => {
         .json({ success: false, message: "Wrong, try again!" });
     }
 
-    res
-      .status(200)
-      .json({ success: true, message: "Correct!", data: validatedCoordinates });
+    res.status(200).json({
+      success: true,
+      message: "Correct!",
+      data: validatedCoordinates[0],
+    });
   } catch (error) {
     next(error);
   }
