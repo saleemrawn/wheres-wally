@@ -7,7 +7,7 @@ const useRoundDisplay = () => {
   const [currentRound, setCurrentRound] = useState(1);
 
   useEffect(() => {
-    setTotalRounds(images?.length);
+    setTotalRounds(images.length);
   }, [images]);
 
   const incrementCurrentRound = () => {
