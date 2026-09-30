@@ -1,6 +1,16 @@
 import { Dialog, Button } from "@radix-ui/themes";
 
-const RoundCompleteDialog = ({ isOpen, currentRound, onNextRound }) => {
+interface RoundCompleteDialogProps {
+  isOpen: boolean;
+  currentRound: number;
+  onNextRound: () => void;
+}
+
+const RoundCompleteDialog = ({
+  isOpen,
+  currentRound,
+  onNextRound,
+}: RoundCompleteDialogProps) => {
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Content className="flex flex-col items-center gap-3 max-w-96! p-10!">
