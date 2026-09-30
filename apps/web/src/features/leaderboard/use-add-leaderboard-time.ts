@@ -17,8 +17,8 @@ const useAddLeaderboardTime = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await service.addLeaderboardTime({ name, time });
-      toast.success(data.message);
+      await service.addLeaderboardTime({ name, time });
+      toast.success("Time added successfully");
     } catch (error) {
       const errDetails = getErrorDetails(error);
       setError(errDetails);
