@@ -26,7 +26,7 @@ const LeaderboardList = () => {
         <Table.Body>
           {leaderboard.length === 0 ? (
             <Table.Row>
-              <Table.Cell colSpan={"3"}>
+              <Table.Cell colSpan={3}>
                 No players yet — be the first!
               </Table.Cell>
             </Table.Row>
