@@ -11,7 +11,7 @@ const useLeaderboard = () => {
     setIsLoading(true);
     try {
       const entries = await service.getLeaderboard();
-      setLeaderboard(entries.data);
+      setLeaderboard(entries);
     } catch (error) {
       setError(
         error instanceof Error
