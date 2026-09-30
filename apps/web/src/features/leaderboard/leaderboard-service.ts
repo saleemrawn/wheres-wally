@@ -1,5 +1,5 @@
 import api from "../../lib/axios";
-import type { LeaderboardEntry } from "./leaderboard-types.js";
+import type { LeaderboardEntry } from "./leaderboard-types.ts";
 import type { Time } from "../timer-display/timer-display-types.ts";
 import type { ApiResponse } from "../../lib/api-types";
 
