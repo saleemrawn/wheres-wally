@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as service from "./leaderboard-service.js";
 
 const useCheckTopTenTime = () => {
