@@ -1,3 +1,13 @@
+import type { Time } from "../game/game-types";
+
+type TotalTime = Pick<Time, "total">;
+
+interface LeaderboardEntry {
+  id: number;
+  name: string;
+  time: TotalTime;
+}
+
 interface ValidationError {
   type: string;
   value: string;
@@ -12,4 +22,4 @@ interface ApiErrorResponse {
   errors: ValidationError[];
 }
 
-export type { ApiErrorResponse, ValidationError };
+export type { LeaderboardEntry, ApiErrorResponse, ValidationError };

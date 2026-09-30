@@ -1,17 +1,11 @@
 import api from "../../lib/axios";
+import type { LeaderboardEntry } from "./leaderboard-types.js";
 import type { Time } from "../game/game-types";
 import type { ApiResponse } from "../../lib/api-types";
 
 const basePath = "/leaderboards";
 
 type TotalTime = Pick<Time, "total">;
-
-interface LeaderboardEntry {
-  id: number;
-  name: string;
-  time: TotalTime;
-}
-
 type AddLeaderboardTimeParams = Omit<LeaderboardEntry, "id">;
 
 interface TopTenCheck {
