@@ -1,5 +1,5 @@
 import { padZero } from "../../utils/number";
-import { Button, Flex, Text } from "@radix-ui/themes";
+import { Flex, Text } from "@radix-ui/themes";
 
 const TimerDisplay = ({ time }) => {
   return (
