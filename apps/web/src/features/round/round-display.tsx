@@ -1,6 +1,11 @@
 import { Flex, Text } from "@radix-ui/themes";
 
-const RoundDisplay = ({ currentRound, totalRounds }) => {
+interface RoundDisplayProps {
+  currentRound: number;
+  totalRounds: number;
+}
+
+const RoundDisplay = ({ currentRound, totalRounds }: RoundDisplayProps) => {
   return (
     <Flex justify={"center"} align={"center"} gap={"2"} className="w-full">
       <Text className="text-blue-950 md:text-xl">Round</Text>
