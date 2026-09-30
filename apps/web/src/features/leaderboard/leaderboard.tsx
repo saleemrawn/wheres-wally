@@ -32,10 +32,10 @@ const LeaderboardList = () => {
             </Table.Row>
           ) : (
             leaderboard.map((player, index) => (
-              <Table.Row key={player?.id}>
+              <Table.Row key={player.id}>
                 <Table.Cell>{getOrdinalSuffix(index + 1)}</Table.Cell>
-                <Table.Cell>{player?.name}</Table.Cell>
-                <Table.Cell>{formatTime(player?.time)}s</Table.Cell>
+                <Table.Cell>{player.name}</Table.Cell>
+                <Table.Cell>{formatTime(player.time)}s</Table.Cell>
               </Table.Row>
             ))
           )}
