@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { Time } from "./game-types";
+import type { Time } from "../timer-display/timer-display-types.ts";
 import { Link } from "react-router";
 import { padZero } from "../../utils/number";
 import { Button, Dialog, Flex, Text } from "@radix-ui/themes";

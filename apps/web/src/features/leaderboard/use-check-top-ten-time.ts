@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Time } from "../game/game-types";
+import type { Time } from "../timer-display/timer-display-types.ts";
 import * as service from "./leaderboard-service.js";
 
 type TotalTime = Pick<Time, "total">;

@@ -1,4 +1,4 @@
-import type { Time } from "../game/game-types";
+import type { Time } from "../timer-display/timer-display-types.ts";
 
 type TotalTime = Pick<Time, "total">;
 
