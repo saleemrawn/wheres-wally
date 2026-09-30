@@ -3,7 +3,7 @@ import { useViewerImages } from "../viewer/use-viewer-images";
 
 const useRoundDisplay = () => {
   const { images } = useViewerImages();
-  const [totalRounds, setTotalRounds] = useState();
+  const [totalRounds, setTotalRounds] = useState(0);
   const [currentRound, setCurrentRound] = useState(1);
 
   useEffect(() => {
