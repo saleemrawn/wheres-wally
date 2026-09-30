@@ -1,7 +1,12 @@
+import type { Time } from "./timer-display-types";
 import { padZero } from "../../utils/number";
 import { Flex, Text } from "@radix-ui/themes";
 
-const TimerDisplay = ({ time }) => {
+interface TimerDisplayProps {
+  time: Pick<Time, "hh" | "mm" | "ss">;
+}
+
+const TimerDisplay = ({ time }: TimerDisplayProps) => {
   return (
     <Flex
       justify={"center"}
