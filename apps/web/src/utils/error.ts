@@ -1,29 +1,47 @@
-const getErrorDetails = (error) => {
-  if (error?.response) {
-    const code = error.response?.data?.code ?? error.response?.status ?? null;
+import axios from "axios";
 
-    const message =
-      error.response?.data?.message ??
-      error.response?.statusText ??
-      "Oops, something went wrong. Please try again later.";
+interface ErrorResponseData {
+  message: string;
+  status?: number | null;
+  code?: string | null;
+  errors?: unknown;
+}
 
-    const errors = error.response?.data?.errors ?? null;
+class ApiError extends Error {
+  status: number | null;
+  code: string | null;
+  errors?: unknown;
 
-    return { code, message, errors };
+  constructor({
+    message,
+    status = null,
+    code = null,
+    errors,
+  }: ErrorResponseData) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status;
+    this.code = code;
+    this.errors = errors;
+  }
+}
+
+const handleApiError = (error: unknown): ApiError => {
+  if (axios.isAxiosError(error) && error.response?.data) {
+    const { message, code, errors } = error.response.data;
+    return new ApiError({
+      message: message ?? error.message,
+      status: error.response.status,
+      code,
+      errors,
+    });
   }
 
-  if (error?.request) {
-    return {
-      code: null,
-      message: "Network error. Please try again later.",
-    };
+  if (error instanceof Error) {
+    return new ApiError({ message: error.message });
   }
 
-  return {
-    code: null,
-    message:
-      error?.message ?? "Oops, something went wrong. Please try again later.",
-  };
+  return new ApiError({ message: "An unexpected error occurred." });
 };
 
-export { getErrorDetails };
+export { ApiError, handleApiError };
