@@ -4,8 +4,10 @@ import { useGameState } from "../../context/game-state.tsx";
 const useTimerDisplay = () => {
   const { isRunning } = useGameState();
   const [time, setTime] = useState({ hh: 0, mm: 0, ss: 0, ms: 0, total: 0 });
-  const startTimeRef = useRef(null);
-  const intervalRef = useRef(null);
+  const startTimeRef = useRef<number | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
     if (!isRunning) {
@@ -19,21 +21,23 @@ const useTimerDisplay = () => {
     startTimeRef.current = Date.now();
 
     intervalRef.current = setInterval(() => {
-      const elapsedMs = Date.now() - startTimeRef.current;
+      if (startTimeRef.current !== null) {
+        const elapsedMs = Date.now() - startTimeRef.current;
 
-      setTime({
-        hh: Math.floor(elapsedMs / 3600000),
-        mm: Math.floor((elapsedMs / 60000) % 60),
-        ss: Math.floor((elapsedMs / 1000) % 60),
-        ms: Math.floor((elapsedMs % 1000) / 10),
-        total: elapsedMs,
-      });
+        setTime({
+          hh: Math.floor(elapsedMs / 3600000),
+          mm: Math.floor((elapsedMs / 60000) % 60),
+          ss: Math.floor((elapsedMs / 1000) % 60),
+          ms: Math.floor((elapsedMs % 1000) / 10),
+          total: elapsedMs,
+        });
+      }
     }, 10);
   };
 
   const endTimer = () => {
     clearInterval(intervalRef.current);
-    intervalRef.current = null;
+    intervalRef.current = undefined;
   };
 
   const resetTimer = () => {
