@@ -1,10 +1,11 @@
 import { useRef, useState } from "react";
+import type { Coordinate, Marker } from "./viewer-types";
 
 const useViewerMarkers = () => {
-  const [markers, setMarkers] = useState([]);
+  const [markers, setMarkers] = useState<Marker[]>([]);
   const markerId = useRef(1);
 
-  const addMarker = (coordinates) => {
+  const addMarker = (coordinates: Coordinate) => {
     setMarkers([
       ...markers,
       { id: markerId.current, coordinates: coordinates },

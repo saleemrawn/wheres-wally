@@ -4,4 +4,14 @@ interface ViewerImage {
   imageToken: string;
 }
 
-export type { ViewerImage };
+interface Coordinate {
+  x: number;
+  y: number;
+}
+
+interface Marker {
+  id: number;
+  coordinates: Coordinate;
+}
+
+export type { ViewerImage, Coordinate, Marker };
