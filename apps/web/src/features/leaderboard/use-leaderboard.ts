@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import type { LeaderboardEntry } from "./leaderboard-types.js";
 import * as service from "./leaderboard-service.js";
+import { handleApiError, ApiError } from "../../utils/error.js";
 
 const useLeaderboard = () => {
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<ApiError | null>(null);
 
   const getLeaderboard = async () => {
     setIsLoading(true);
@@ -13,11 +14,7 @@ const useLeaderboard = () => {
       const entries = await service.getLeaderboard();
       setLeaderboard(entries);
     } catch (error) {
-      setError(
-        error instanceof Error
-          ? error
-          : new Error("An unexpected error occurred"),
-      );
+      setError(handleApiError(error));
     } finally {
       setIsLoading(false);
     }
