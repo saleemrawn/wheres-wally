@@ -19,9 +19,10 @@ import { useViewer } from "../viewer/use-viewer";
 import { useDialog } from "../../hooks/use-dialog";
 import { useViewerTransform } from "../viewer/use-viewer-transform";
 import { useViewerMarkers } from "../viewer/use-viewer-markers";
-import { Flex } from "@radix-ui/themes";
+import { Callout, Flex } from "@radix-ui/themes";
 import { Loading } from "../../components/loading.tsx";
 import type { Coordinate } from "../viewer/viewer-types.ts";
+import { Info } from "lucide-react";
 
 const Game = () => {
   const { setGameRunning } = useGameStateUpdate();
@@ -181,15 +182,24 @@ const Game = () => {
         <RoundDisplay currentRound={currentRound} totalRounds={totalRounds} />
       </Flex>
 
-      <Viewer
-        token={image?.imageToken}
-        markers={markers}
-        ref={transformRef}
-        onClick={(coords) => {
-          setSelectedCoordinates(coords);
-          openCharacterDialog();
-        }}
-      />
+      {image ? (
+        <Viewer
+          token={image.imageToken}
+          markers={markers}
+          ref={transformRef}
+          onClick={(coords) => {
+            setSelectedCoordinates(coords);
+            openCharacterDialog();
+          }}
+        />
+      ) : (
+        <Callout.Root color="red">
+          <Callout.Icon>
+            <Info />
+          </Callout.Icon>
+          <Callout.Text>The image cannot currently be displayed.</Callout.Text>
+        </Callout.Root>
+      )}
 
       <CharacterDialog
         isOpen={isCharacterDialogOpen}
