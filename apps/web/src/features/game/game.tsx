@@ -23,7 +23,7 @@ import { Flex } from "@radix-ui/themes";
 import { Loading } from "../../components/loading.tsx";
 
 const Game = () => {
-  const { setGameRunning, setGameFinished } = useGameStateUpdate();
+  const { setGameRunning } = useGameStateUpdate();
   const { time, startTimer, endTimer, resetTimer } = useTimerDisplay();
 
   const {
