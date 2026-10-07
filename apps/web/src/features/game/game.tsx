@@ -168,7 +168,7 @@ const Game = () => {
     startTimer();
   };
 
-  const handleLeaderboardSubmit = async (name) => {
+  const handleLeaderboardSubmit = async (name: string) => {
     await addLeaderboardTime({ name, time: time.total });
   };
 
