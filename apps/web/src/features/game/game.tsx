@@ -97,7 +97,7 @@ const Game = () => {
   });
 
   const totalCharacters = getCharacterCount();
-  const timeoutRef = useRef(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
   const isLoading = isViewerLoading;
 
   useEffect(() => {
