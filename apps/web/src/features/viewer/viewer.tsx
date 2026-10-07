@@ -14,7 +14,7 @@ import {
   Check,
 } from "lucide-react";
 import "./viewer.css";
-import type { CursorCoordinatesProps } from "./viewer-types";
+import type { Coordinate, CursorCoordinatesProps } from "./viewer-types";
 
 const MARKER_SIZE = 48;
 
@@ -39,9 +39,9 @@ const CursorCoordinates = ({
   return <></>;
 };
 
-const ViewerMarker = ({ posX, posY }) => {
-  const x = posX - MARKER_SIZE / 2;
-  const y = posY - MARKER_SIZE / 2;
+const ViewerMarker = ({ x, y }: Coordinate) => {
+  const posX = x - MARKER_SIZE / 2;
+  const posY = y - MARKER_SIZE / 2;
 
   return (
     <Flex
@@ -51,8 +51,8 @@ const ViewerMarker = ({ posX, posY }) => {
         "absolute z-10 bg-green-600/80 border-3 border-white rounded-full shadow-xl/80"
       }
       style={{ width: `${MARKER_SIZE}px`, height: `${MARKER_SIZE}px` }}
-      top={`${y}px`}
-      left={`${x}px`}
+      top={`${posY}px`}
+      left={`${posX}px`}
     >
       <Check strokeWidth={"3"} className="text-white" />
     </Flex>
@@ -182,8 +182,8 @@ const Viewer = ({ token, ref, markers, onClick }) => {
             {markers.map((marker) => (
               <ViewerMarker
                 key={marker.id}
-                posX={marker.coordinates.x}
-                posY={marker.coordinates.y}
+                x={marker.coordinates.x}
+                y={marker.coordinates.y}
               />
             ))}
 
