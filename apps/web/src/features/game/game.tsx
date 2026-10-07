@@ -91,7 +91,9 @@ const Game = () => {
   const { transformRef, resetViewer } = useViewerTransform();
   const { markers, addMarker, resetMarkers } = useViewerMarkers();
 
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [selectedCharacter, setSelectedCharacter] = useState<number | null>(
+    null,
+  );
   const [selectedCoordinates, setSelectedCoordinates] =
     useState<Coordinate | null>(null);
 
@@ -125,7 +127,7 @@ const Game = () => {
   }, []);
 
   const handleValidate = async () => {
-    if (selectedCoordinates === null) return;
+    if (selectedCharacter === null || selectedCoordinates === null) return;
 
     const validatedId = await validate({
       coordinates: selectedCoordinates,
