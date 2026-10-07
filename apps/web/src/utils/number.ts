@@ -1,4 +1,4 @@
-const getOrdinalSuffix = (number) => {
+const getOrdinalSuffix = (number: number) => {
   let j = number % 10,
     k = number % 100;
 
@@ -17,11 +17,11 @@ const getOrdinalSuffix = (number) => {
   return number + "th";
 };
 
-const padZero = (num) => {
+const padZero = (num: number) => {
   return (num + "").length === 1 ? "0" + num : num + "";
 };
 
-const formatTime = (ms) => {
+const formatTime = (ms: number) => {
   const hours = padZero(Math.floor(ms / 3600000));
   const minutes = padZero(Math.floor(ms / 600000));
   const seconds = padZero(Math.floor(ms / 1000));
