@@ -1,4 +1,6 @@
-import type { ReactNode } from "react";
+import type { ReactNode, Ref } from "react";
+import type { ReactZoomPanPinchContentRef } from "react-zoom-pan-pinch";
+import type { VIEWER_ASSETS } from "./viewer-assets";
 
 interface ViewerImage {
   id: number;
@@ -28,10 +30,21 @@ interface ViewerContainerProps {
   onClick: () => void;
 }
 
+interface ViewerProps {
+  token: string;
+  ref: Ref<ReactZoomPanPinchContentRef>;
+  markers: Marker[];
+  onClick: (coordinate: Coordinate) => void;
+}
+
+type ViewerAssetKey = keyof typeof VIEWER_ASSETS;
+
 export type {
   ViewerImage,
   Coordinate,
   Marker,
   CursorCoordinatesProps,
   ViewerContainerProps,
+  ViewerProps,
+  ViewerAssetKey,
 };

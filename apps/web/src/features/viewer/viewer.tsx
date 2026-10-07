@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import {
   TransformWrapper,
   TransformComponent,
@@ -18,7 +18,9 @@ import type {
   Coordinate,
   CursorCoordinatesProps,
   ViewerContainerProps,
+  ViewerProps,
 } from "./viewer-types";
+import { isViewerAssetKey } from "./viewer-utils";
 
 const MARKER_SIZE = 48;
 
@@ -122,14 +124,14 @@ const ViewerContainer = ({
   );
 };
 
-const Viewer = ({ token, ref, markers, onClick }) => {
+const Viewer = ({ token, ref, markers, onClick }: ViewerProps) => {
   const [isPanning, setIsPanning] = useState(false);
   const mousePosition = useRef({ x: 0, y: 0 });
   const lastClickCoords = useRef({ x: 0, y: 0 });
   const wasDragging = useRef(false);
 
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget?.getBoundingClientRect();
     mousePosition.current = {
       x: e.clientX - rect.left,
       y: e.clientY - rect.top,
@@ -157,7 +159,7 @@ const Viewer = ({ token, ref, markers, onClick }) => {
     setIsPanning(false);
   };
 
-  const handleCoordsChange = (coords) => {
+  const handleCoordsChange = (coords: Coordinate) => {
     lastClickCoords.current = coords;
   };
 
@@ -195,7 +197,13 @@ const Viewer = ({ token, ref, markers, onClick }) => {
               />
             ))}
 
-            <img src={VIEWER_ASSETS[token]} alt="" className="cursor-pointer" />
+            {isViewerAssetKey(token) && (
+              <img
+                src={VIEWER_ASSETS[token]}
+                alt=""
+                className="cursor-pointer"
+              />
+            )}
           </TransformComponent>
         </Box>
       </TransformWrapper>
