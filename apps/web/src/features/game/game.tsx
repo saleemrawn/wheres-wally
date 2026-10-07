@@ -169,7 +169,7 @@ const Game = () => {
   };
 
   const handleLeaderboardSubmit = async (name: string) => {
-    await addLeaderboardTime({ name, time: time.total });
+    await addLeaderboardTime({ name, time: { total: time.total } });
   };
 
   return (
