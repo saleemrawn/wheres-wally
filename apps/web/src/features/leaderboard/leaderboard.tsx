@@ -2,7 +2,15 @@ import { useEffect } from "react";
 import { useGameStateUpdate } from "../../context/game-state.tsx";
 import { useLeaderboard } from "./use-leaderboard";
 import { getOrdinalSuffix, formatTime } from "../../utils/number";
-import { Container, Heading, Table, Flex, Skeleton } from "@radix-ui/themes";
+import {
+  Container,
+  Heading,
+  Table,
+  Flex,
+  Skeleton,
+  Callout,
+} from "@radix-ui/themes";
+import { Info } from "lucide-react";
 
 const LeaderboardList = () => {
   const { leaderboard, isLoading, error } = useLeaderboard();
@@ -11,6 +19,19 @@ const LeaderboardList = () => {
   useEffect(() => {
     setGameRunning(false);
   }, []);
+
+  if (error) {
+    return (
+      <Callout.Root color="red">
+        <Callout.Icon>
+          <Info />
+        </Callout.Icon>
+        <Callout.Text>
+          {error.message} - ({error.code || error.status})
+        </Callout.Text>
+      </Callout.Root>
+    );
+  }
 
   return (
     <Skeleton loading={isLoading}>
