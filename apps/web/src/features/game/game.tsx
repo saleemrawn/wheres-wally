@@ -21,6 +21,7 @@ import { useViewerTransform } from "../viewer/use-viewer-transform";
 import { useViewerMarkers } from "../viewer/use-viewer-markers";
 import { Flex } from "@radix-ui/themes";
 import { Loading } from "../../components/loading.tsx";
+import type { Coordinate } from "../viewer/viewer-types.ts";
 
 const Game = () => {
   const { setGameRunning } = useGameStateUpdate();
@@ -91,10 +92,8 @@ const Game = () => {
   const { markers, addMarker, resetMarkers } = useViewerMarkers();
 
   const [selectedCharacter, setSelectedCharacter] = useState(null);
-  const [selectedCoordinates, setSelectedCoordinates] = useState({
-    x: null,
-    y: null,
-  });
+  const [selectedCoordinates, setSelectedCoordinates] =
+    useState<Coordinate | null>(null);
 
   const totalCharacters = getCharacterCount();
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -126,6 +125,8 @@ const Game = () => {
   }, []);
 
   const handleValidate = async () => {
+    if (selectedCoordinates === null) return;
+
     const validatedId = await validate({
       coordinates: selectedCoordinates,
       characterId: selectedCharacter,
