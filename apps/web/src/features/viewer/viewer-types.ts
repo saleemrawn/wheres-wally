@@ -14,4 +14,9 @@ interface Marker {
   coordinates: Coordinate;
 }
 
-export type { ViewerImage, Coordinate, Marker };
+interface CursorCoordinatesProps {
+  mousePosition: Coordinate;
+  onMouseMove: (coordinate: Coordinate) => void;
+}
+
+export type { ViewerImage, Coordinate, Marker, CursorCoordinatesProps };

@@ -14,10 +14,14 @@ import {
   Check,
 } from "lucide-react";
 import "./viewer.css";
+import type { CursorCoordinatesProps } from "./viewer-types";
 
 const MARKER_SIZE = 48;
 
-const CursorCoordinates = ({ mousePosition, onMouseMove }) => {
+const CursorCoordinates = ({
+  mousePosition,
+  onMouseMove,
+}: CursorCoordinatesProps) => {
   const { scale, positionX, positionY } = useTransformComponent(
     ({ state }) => state,
   );
@@ -26,8 +30,13 @@ const CursorCoordinates = ({ mousePosition, onMouseMove }) => {
   const contentY = (mousePosition?.y - positionY) / scale;
 
   useEffect(() => {
-    onMouseMove({ x: contentX.toFixed(0), y: contentY.toFixed(0) });
+    onMouseMove({
+      x: Number(contentX.toFixed(0)),
+      y: Number(contentY.toFixed(0)),
+    });
   }, [mousePosition]);
+
+  return <></>;
 };
 
 const ViewerMarker = ({ posX, posY }) => {
