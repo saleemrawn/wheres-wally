@@ -112,7 +112,7 @@ const Game = () => {
 
     if (currentRound === totalRounds) {
       endTimer();
-      checkWithinTopTen(time.total);
+      checkWithinTopTen({ total: time.total });
       openGameCompleteDialog();
     } else {
       openRoundCompleteDialog();
