@@ -127,12 +127,17 @@ const Game = () => {
   }, []);
 
   const handleValidate = async () => {
-    if (selectedCharacter === null || selectedCoordinates === null) return;
+    if (
+      selectedCharacter === null ||
+      selectedCoordinates === null ||
+      image === undefined
+    )
+      return;
 
     const validatedId = await validate({
       coordinates: selectedCoordinates,
       characterId: selectedCharacter,
-      illustrationId: image?.id,
+      illustrationId: image.id,
     });
 
     if (validatedId) {
