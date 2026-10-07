@@ -14,7 +14,11 @@ import {
   Check,
 } from "lucide-react";
 import "./viewer.css";
-import type { Coordinate, CursorCoordinatesProps } from "./viewer-types";
+import type {
+  Coordinate,
+  CursorCoordinatesProps,
+  ViewerContainerProps,
+} from "./viewer-types";
 
 const MARKER_SIZE = 48;
 
@@ -99,7 +103,11 @@ const ViewerControls = () => {
   );
 };
 
-const ViewerContainer = ({ children, isPanning, onClick }) => {
+const ViewerContainer = ({
+  children,
+  isPanning,
+  onClick,
+}: ViewerContainerProps) => {
   return (
     <Box
       height={"100%"}

@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 interface ViewerImage {
   id: number;
   name: string;
@@ -19,4 +21,17 @@ interface CursorCoordinatesProps {
   onMouseMove: (coordinate: Coordinate) => void;
 }
 
-export type { ViewerImage, Coordinate, Marker, CursorCoordinatesProps };
+interface ViewerContainerProps {
+  children: ReactNode;
+  isPanning: boolean;
+  className?: string;
+  onClick: () => void;
+}
+
+export type {
+  ViewerImage,
+  Coordinate,
+  Marker,
+  CursorCoordinatesProps,
+  ViewerContainerProps,
+};
