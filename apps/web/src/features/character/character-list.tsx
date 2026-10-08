@@ -13,7 +13,7 @@ interface CharacterItemProps {
 
 interface CharacterListProps {
   characters: { id: number; name: string; imageToken: CharacterToken }[];
-  onSelect: (value: string) => void;
+  onSelect: (value: number) => void;
   completedIds: Set<number>;
 }
 
@@ -54,7 +54,7 @@ const CharacterList = ({
       <RadioCards.Root
         variant="surface"
         columns={{ initial: "1", sm: "3", lg: "5" }}
-        onValueChange={onSelect}
+        onValueChange={(id) => onSelect(Number(id))}
       >
         {characters?.map((character) => {
           const isCompleted = completedIds.has(character.id);
