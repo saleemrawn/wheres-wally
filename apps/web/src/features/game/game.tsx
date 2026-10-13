@@ -226,7 +226,7 @@ const Game = () => {
       >
         {isTopTen ? (
           <LeaderboardForm
-            errors={addLeaderboardTimeError?.errors}
+            errors={addLeaderboardTimeError}
             onSubmit={handleLeaderboardSubmit}
             onResetErrors={resetError}
           />
