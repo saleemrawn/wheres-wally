@@ -2,10 +2,11 @@ import { useState } from "react";
 import type { ValidateParams } from "./character-types.js";
 import toast from "react-hot-toast";
 import * as service from "./character-service.js";
+import { type TError, getError } from "../../utils/error.js";
 
 const useValidateCharacter = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<TError | null>(null);
 
   const validate = async (params: ValidateParams): Promise<number | null> => {
     setIsLoading(true);
@@ -20,13 +21,9 @@ const useValidateCharacter = () => {
 
       toast.success(validation?.message);
       return validation.data.characterId ?? null;
-    } catch (error) {
-      setError(
-        error instanceof Error
-          ? error
-          : new Error("An unexpected error occurred"),
-      );
-
+    } catch (e) {
+      const err = getError(e);
+      setError(err);
       return null;
     } finally {
       setIsLoading(false);
