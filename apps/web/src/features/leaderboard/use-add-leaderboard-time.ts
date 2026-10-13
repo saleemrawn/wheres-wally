@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { ApiError, handleApiError } from "../../utils/error.js";
-import type { LeaderboardEntry } from "./leaderboard-types.js";
+import { type TError, getError } from "../../utils/error.ts";
+import type { LeaderboardEntry } from "./leaderboard-types.ts";
 import toast from "react-hot-toast";
-import * as service from "./leaderboard-service.js";
+import * as service from "./leaderboard-service.ts";
 
 type AddLeaderboardTimeParams = Omit<LeaderboardEntry, "id">;
 
 const useAddLeaderboardTime = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<ApiError | null>(null);
+  const [error, setError] = useState<TError | null>(null);
 
   const addLeaderboardTime = async ({
     name,
@@ -20,7 +20,8 @@ const useAddLeaderboardTime = () => {
       await service.addLeaderboardTime({ name, time });
       toast.success("Time added successfully");
     } catch (error) {
-      setError(handleApiError(error));
+      const err = getError(error);
+      setError(err);
     } finally {
       setIsLoading(false);
     }
