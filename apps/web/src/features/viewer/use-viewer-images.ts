@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import * as service from "./viewer-service";
 import type { ViewerImage } from "./viewer-types";
-import { handleApiError, type ApiError } from "../../utils/error";
+import { type TError, getError } from "../../utils/error";
 
 const useViewerImages = () => {
   const [images, setImages] = useState<ViewerImage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<ApiError | null>(null);
+  const [error, setError] = useState<TError | null>(null);
 
   const getViewerImages = async () => {
     setIsLoading(true);
     try {
       const images = await service.getViewerImages();
       setImages(images);
-    } catch (error) {
-      setError(handleApiError(error));
+    } catch (e) {
+      const err = getError(e);
+      setError(err);
     } finally {
       setIsLoading(false);
     }
