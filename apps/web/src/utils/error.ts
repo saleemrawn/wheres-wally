@@ -1,47 +1,98 @@
 import axios from "axios";
 
-interface ErrorResponseData {
+interface TValidationError {
+  type: string;
+  value: unknown;
+  msg: string;
+  path: string;
+  location: string;
+}
+
+interface TFormError {
   message: string;
-  status?: number | null;
-  code?: string | null;
+  errors: TValidationError[];
+}
+
+interface TApiError {
+  message: string;
+  status: number;
+  code?: string;
   errors?: unknown;
 }
 
-class ApiError extends Error {
-  status: number | null;
-  code: string | null;
+type TError = TApiError | TFormError;
+
+class ErrorBase extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = new.target.name;
+  }
+}
+
+class ApiError extends ErrorBase {
+  status: number;
+  code?: string;
   errors?: unknown;
 
-  constructor({
-    message,
-    status = null,
-    code = null,
-    errors,
-  }: ErrorResponseData) {
+  constructor(
+    message: string,
+    status: number,
+    code?: string,
+    errors?: unknown,
+  ) {
     super(message);
-    this.name = "ApiError";
     this.status = status;
     this.code = code;
     this.errors = errors;
   }
 }
 
-const handleApiError = (error: unknown): ApiError => {
-  if (axios.isAxiosError(error) && error.response?.data) {
-    const { message, code, errors } = error.response.data;
-    return new ApiError({
-      message: message ?? error.message,
-      status: error.response.status,
-      code,
-      errors,
-    });
-  }
+class FormError extends ErrorBase {
+  errors: TValidationError[];
 
-  if (error instanceof Error) {
-    return new ApiError({ message: error.message });
+  constructor(message: string, errors: TValidationError[] = []) {
+    super(message);
+    this.errors = errors;
   }
+}
 
-  return new ApiError({ message: "An unexpected error occurred." });
+const isValidationError = (error: unknown): error is TValidationError[] => {
+  return (
+    Array.isArray(error) &&
+    error.every(
+      (item) =>
+        typeof error === "object" &&
+        item !== null &&
+        "msg" in item &&
+        "path" in item,
+    )
+  );
 };
 
-export { ApiError, handleApiError };
+const getError = (error: unknown): TError => {
+  if (error instanceof ApiError || error instanceof FormError) {
+    return error;
+  }
+
+  if (axios.isAxiosError(error)) {
+    const status = error.response?.status ?? 0;
+    const data = error.response?.data ?? undefined;
+    const code = data?.code ?? error.code;
+    const message = data?.message ?? error.message;
+    const errors = data?.errors;
+
+    if (code === "ECONNABORTED" || code === "ETIMEDOUT") {
+      return new ApiError("Request timed out. Please try again.", status, code);
+    }
+
+    if (status === 400 && isValidationError(errors)) {
+      return new FormError(error.message, errors);
+    }
+
+    return new ApiError(message, status, code, errors);
+  }
+
+  return new ApiError("Something went wrong", 500);
+};
+
+export { type TError, ApiError, FormError, getError };
