@@ -11,6 +11,7 @@ import {
   Callout,
 } from "@radix-ui/themes";
 import { Info } from "lucide-react";
+import { ApiError } from "../../utils/error.ts";
 
 const LeaderboardList = () => {
   const { leaderboard, isLoading, error } = useLeaderboard();
@@ -20,7 +21,7 @@ const LeaderboardList = () => {
     setGameRunning(false);
   }, []);
 
-  if (error) {
+  if (error instanceof ApiError) {
     return (
       <Callout.Root color="red">
         <Callout.Icon>
