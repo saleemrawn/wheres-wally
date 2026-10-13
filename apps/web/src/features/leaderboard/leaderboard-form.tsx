@@ -1,12 +1,10 @@
 import { useState } from "react";
-import type { ValidationError } from "./leaderboard-types";
+import { type TError, FormError } from "../../utils/error";
 import { Flex, Button, TextField, Heading, Callout } from "@radix-ui/themes";
 import { Form } from "radix-ui";
 
-type FormError = Pick<ValidationError, "msg">;
-
 interface LeaderboardFormProps {
-  errors: FormError[] | null;
+  errors: TError | null;
   onSubmit: (name: string) => void | Promise<void>;
   onResetErrors: () => void;
 }
@@ -33,9 +31,9 @@ const LeaderboardForm = ({
           ...and made the top 10 fastest times!
         </Heading>
 
-        {errors ? (
+        {errors instanceof FormError && (
           <Flex direction={"column"} gap={"3"}>
-            {errors.map((err, index) => {
+            {errors.errors.map((err, index) => {
               return (
                 <Callout.Root color="red" size={"1"} key={index}>
                   <Callout.Text>{err.msg}</Callout.Text>
@@ -43,7 +41,7 @@ const LeaderboardForm = ({
               );
             })}
           </Flex>
-        ) : null}
+        )}
 
         <Form.Field name="name" serverInvalid={Boolean(errors)}>
           <Flex direction={"column"} gap={"2"} align={"center"}>
