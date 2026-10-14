@@ -79,15 +79,9 @@ const Game = () => {
     resetError,
   } = useAddLeaderboardTime();
 
-  const {
-    isTopTen,
-    error: checkTopTenError,
-    checkWithinTopTen,
-  } = useCheckTopTenTime();
-
+  const { isTopTen, checkWithinTopTen } = useCheckTopTenTime();
   const { transformRef, resetViewer } = useViewerTransform();
   const { markers, addMarker, resetMarkers } = useViewerMarkers();
-
   const [selectedCharacter, setSelectedCharacter] = useState<number | null>(
     null,
   );
