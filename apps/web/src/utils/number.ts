@@ -23,8 +23,8 @@ const padZero = (num: number) => {
 
 const formatTime = (ms: number) => {
   const hours = padZero(Math.floor(ms / 3600000));
-  const minutes = padZero(Math.floor(ms / 600000));
-  const seconds = padZero(Math.floor(ms / 1000));
+  const minutes = padZero(Math.floor(ms / 60000) % 60);
+  const seconds = padZero(Math.floor(ms / 1000) % 60);
 
   return `${hours}:${minutes}:${seconds}`;
 };
