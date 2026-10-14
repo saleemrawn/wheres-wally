@@ -1,4 +1,5 @@
 import { CHARACTER_ASSETS } from "./character-assets";
+import { ApiError, type TError } from "../../utils/error";
 import { Info } from "lucide-react";
 import {
   Box,
@@ -21,6 +22,7 @@ interface CharacterItemProps {
 interface CharacterListProps {
   characters: { id: number; name: string; imageToken: CharacterToken }[];
   completedIds: Set<number>;
+  error: TError | null;
   isLoading: boolean;
   onSelect: (value: number) => void;
 }
@@ -44,6 +46,7 @@ const CharacterItem = ({
 const CharacterList = ({
   characters,
   completedIds,
+  error,
   isLoading,
   onSelect,
 }: CharacterListProps) => {
@@ -60,6 +63,14 @@ const CharacterList = ({
 
   return (
     <Skeleton loading={isLoading}>
+      {error instanceof ApiError && (
+        <Callout.Root color="red" size={"1"}>
+          <Callout.Text>
+            {error.message} ({error.status})
+          </Callout.Text>
+        </Callout.Root>
+      )}
+
       <Flex gap={"8"}>
         <RadioCards.Root
           variant="surface"

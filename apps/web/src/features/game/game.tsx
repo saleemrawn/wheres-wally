@@ -209,6 +209,7 @@ const Game = () => {
         <CharacterList
           characters={characters}
           completedIds={completedIds}
+          error={charactersError}
           isLoading={isCharactersLoading}
           onSelect={setSelectedCharacter}
         />
