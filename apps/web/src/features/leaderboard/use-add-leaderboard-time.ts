@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { type TError, getError } from "../../utils/error.ts";
 import type { LeaderboardEntry } from "./leaderboard-types.ts";
 import toast from "react-hot-toast";
@@ -10,6 +11,8 @@ const useAddLeaderboardTime = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<TError | null>(null);
 
+  const navigate = useNavigate();
+
   const addLeaderboardTime = async ({
     name,
     time,
@@ -18,6 +21,7 @@ const useAddLeaderboardTime = () => {
     setError(null);
     try {
       await service.addLeaderboardTime({ name, time });
+      navigate("/leaderboard", { replace: true });
       toast.success("Time added successfully");
     } catch (error) {
       const err = getError(error);
