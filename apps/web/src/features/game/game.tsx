@@ -84,7 +84,6 @@ const Game = () => {
 
   const {
     isTopTen,
-    isLoading: isCheckTopTenLoading,
     error: checkTopTenError,
     checkWithinTopTen,
   } = useCheckTopTenTime();
