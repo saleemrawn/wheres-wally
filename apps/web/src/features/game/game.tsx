@@ -66,11 +66,8 @@ const Game = () => {
     getCharacterCount,
   } = useCharacters();
 
-  const {
-    isLoading: isValidateCharacterLoading,
-    error: errorValidateCharacter,
-    validate,
-  } = useValidateCharacter();
+  const { isLoading: isValidateCharacterLoading, validate } =
+    useValidateCharacter();
 
   const { completedIds, addCompletedId, resetCompletedIds } =
     useCompletedCharacters();
