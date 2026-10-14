@@ -1,11 +1,7 @@
-import type { Time } from "../timer-display/timer-display-types.ts";
-
-type TotalTime = Pick<Time, "total">;
-
 interface LeaderboardEntry {
   id: number;
   name: string;
-  time: TotalTime;
+  time: number;
 }
 
 interface ValidationError {
