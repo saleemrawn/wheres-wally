@@ -4,12 +4,14 @@ import { Flex, Button, TextField, Heading, Callout } from "@radix-ui/themes";
 import { Form } from "radix-ui";
 
 interface LeaderboardFormProps {
+  isAddLeaderboardTimeLoading: boolean;
   errors: TError | null;
   onSubmit: (name: string) => void | Promise<void>;
   onResetErrors: () => void;
 }
 
 const LeaderboardForm = ({
+  isAddLeaderboardTimeLoading,
   errors,
   onSubmit,
   onResetErrors,
@@ -68,7 +70,12 @@ const LeaderboardForm = ({
       </Flex>
       <Flex justify={"center"}>
         <Form.Submit asChild>
-          <Button type={"submit"} size={"3"} mt={"4"}>
+          <Button
+            type={"submit"}
+            size={"3"}
+            mt={"4"}
+            loading={isAddLeaderboardTimeLoading}
+          >
             Add to Leaderboard
           </Button>
         </Form.Submit>

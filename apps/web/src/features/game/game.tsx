@@ -228,6 +228,7 @@ const Game = () => {
       >
         {isTopTen ? (
           <LeaderboardForm
+            isAddLeaderboardTimeLoading={isAddLeaderboardTimeLoading}
             errors={addLeaderboardTimeError}
             onSubmit={handleLeaderboardSubmit}
             onResetErrors={resetError}
