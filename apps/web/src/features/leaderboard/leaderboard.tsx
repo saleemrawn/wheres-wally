@@ -57,7 +57,7 @@ const LeaderboardList = () => {
               <Table.Row key={player.id}>
                 <Table.Cell>{getOrdinalSuffix(index + 1)}</Table.Cell>
                 <Table.Cell>{player.name}</Table.Cell>
-                <Table.Cell>{formatTime(Number(player.time))}s</Table.Cell>
+                <Table.Cell>{formatTime(player.time)}s</Table.Cell>
               </Table.Row>
             ))
           )}
