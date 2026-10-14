@@ -1,6 +1,13 @@
 import { CHARACTER_ASSETS } from "./character-assets";
 import { Info } from "lucide-react";
-import { Box, Flex, Text, RadioCards, Callout } from "@radix-ui/themes";
+import {
+  Box,
+  Flex,
+  Text,
+  RadioCards,
+  Callout,
+  Skeleton,
+} from "@radix-ui/themes";
 
 type CharacterToken = keyof typeof CHARACTER_ASSETS;
 
@@ -13,8 +20,9 @@ interface CharacterItemProps {
 
 interface CharacterListProps {
   characters: { id: number; name: string; imageToken: CharacterToken }[];
-  onSelect: (value: number) => void;
   completedIds: Set<number>;
+  isLoading: boolean;
+  onSelect: (value: number) => void;
 }
 
 const CharacterItem = ({
@@ -35,8 +43,9 @@ const CharacterItem = ({
 
 const CharacterList = ({
   characters,
-  onSelect,
   completedIds,
+  isLoading,
+  onSelect,
 }: CharacterListProps) => {
   if (characters?.length === 0) {
     return (
@@ -50,31 +59,33 @@ const CharacterList = ({
   }
 
   return (
-    <Flex gap={"8"}>
-      <RadioCards.Root
-        variant="surface"
-        columns={{ initial: "1", sm: "3", lg: "5" }}
-        onValueChange={(id) => onSelect(Number(id))}
-      >
-        {characters?.map((character) => {
-          const isCompleted = completedIds.has(character.id);
-          return (
-            <RadioCards.Item
-              key={character.id}
-              value={String(character.id)}
-              disabled={isCompleted}
-            >
-              <CharacterItem
-                name={character.name}
-                token={character.imageToken}
-                alt={character.name}
-                isCompleted={isCompleted}
-              />
-            </RadioCards.Item>
-          );
-        })}
-      </RadioCards.Root>
-    </Flex>
+    <Skeleton loading={isLoading}>
+      <Flex gap={"8"}>
+        <RadioCards.Root
+          variant="surface"
+          columns={{ initial: "1", sm: "3", lg: "5" }}
+          onValueChange={(id) => onSelect(Number(id))}
+        >
+          {characters?.map((character) => {
+            const isCompleted = completedIds.has(character.id);
+            return (
+              <RadioCards.Item
+                key={character.id}
+                value={String(character.id)}
+                disabled={isCompleted}
+              >
+                <CharacterItem
+                  name={character.name}
+                  token={character.imageToken}
+                  alt={character.name}
+                  isCompleted={isCompleted}
+                />
+              </RadioCards.Item>
+            );
+          })}
+        </RadioCards.Root>
+      </Flex>
+    </Skeleton>
   );
 };
 

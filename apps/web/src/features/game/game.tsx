@@ -209,6 +209,7 @@ const Game = () => {
         <CharacterList
           characters={characters}
           completedIds={completedIds}
+          isLoading={isCharactersLoading}
           onSelect={setSelectedCharacter}
         />
       </CharacterDialog>
