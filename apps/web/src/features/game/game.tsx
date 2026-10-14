@@ -203,6 +203,7 @@ const Game = () => {
 
       <CharacterDialog
         isOpen={isCharacterDialogOpen}
+        isValidateCharacterLoading={isValidateCharacterLoading}
         onClose={closeCharacterDialog}
         onSubmit={handleValidate}
       >

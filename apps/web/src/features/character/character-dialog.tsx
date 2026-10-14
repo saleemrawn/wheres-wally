@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 
 interface CharacterDialogProps {
   isOpen: boolean;
+  isValidateCharacterLoading: boolean;
   onClose: (event: MouseEvent<HTMLButtonElement>) => void;
   onSubmit: () => void;
   children: ReactNode;
@@ -12,6 +13,7 @@ interface CharacterDialogProps {
 
 const CharacterDialog = ({
   isOpen,
+  isValidateCharacterLoading,
   onClose,
   onSubmit,
   children,
@@ -48,7 +50,11 @@ const CharacterDialog = ({
           </Form.Field>
 
           <Form.Submit asChild>
-            <Button size={"3"} radius={"full"}>
+            <Button
+              loading={isValidateCharacterLoading}
+              size={"3"}
+              radius={"full"}
+            >
               Submit
             </Button>
           </Form.Submit>
