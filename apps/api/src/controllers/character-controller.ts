@@ -1,6 +1,6 @@
 import { body, matchedData, validationResult } from "express-validator";
-import { getMatchingCoordinates } from "../repositories/coordinate-repository.js";
-import * as repository from "../repositories/character-repository.js";
+import { getMatchingCoordinates } from "../repositories/coordinate-repository";
+import * as repository from "../repositories/character-repository";
 
 const validateCharacterValidators = [
   body("coordinates")

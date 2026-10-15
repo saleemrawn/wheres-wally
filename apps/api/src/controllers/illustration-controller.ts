@@ -1,4 +1,4 @@
-import * as repository from "../repositories/illustration-repository.js";
+import * as repository from "../repositories/illustration-repository";
 
 const getIllustrations = async (req, res, next) => {
   try {

@@ -1,4 +1,4 @@
-import { prisma } from "../lib/prisma.js";
+import { prisma } from "../lib/prisma";
 
 const getLeaderboard = async () => {
   const times = await prisma.leaderboard.findMany({

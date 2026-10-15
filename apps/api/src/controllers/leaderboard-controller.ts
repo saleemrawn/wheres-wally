@@ -1,5 +1,5 @@
 import { body, matchedData, validationResult } from "express-validator";
-import * as repository from "../repositories/leaderboard-repository.js";
+import * as repository from "../repositories/leaderboard-repository";
 
 const leaderboardValidators = [
   body("name")

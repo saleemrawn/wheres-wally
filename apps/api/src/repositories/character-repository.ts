@@ -1,4 +1,4 @@
-import { prisma } from "../lib/prisma.js";
+import { prisma } from "../lib/prisma";
 
 const getCharacters = async () => {
   const characters = await prisma.character.findMany();
