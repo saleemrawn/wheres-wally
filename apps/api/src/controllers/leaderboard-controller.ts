@@ -1,3 +1,4 @@
+import type { Request, Response, NextFunction } from "express";
 import { body, matchedData, validationResult } from "express-validator";
 import * as repository from "../repositories/leaderboard-repository";
 
@@ -20,7 +21,11 @@ const leaderboardValidators = [
   ,
 ];
 
-const getLeaderboard = async (req, res, next) => {
+const getLeaderboard = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const times = await repository.getLeaderboard();
     res.status(200).json({ success: true, data: times });
@@ -29,7 +34,11 @@ const getLeaderboard = async (req, res, next) => {
   }
 };
 
-const addLeaderboardTime = async (req, res, next) => {
+const addLeaderboardTime = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -53,7 +62,11 @@ const addLeaderboardTime = async (req, res, next) => {
   }
 };
 
-const isTopTenTime = async (req, res, next) => {
+const isTopTenTime = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const userTime = Number(req.params.time);
     const row = await repository.getRowTenTime();
