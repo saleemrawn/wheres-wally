@@ -1,11 +1,18 @@
 import { prisma } from "../lib/prisma";
 
+interface getMatchingCoordinatesParams {
+  x: number;
+  y: number;
+  characterId: number;
+  illustrationId: number;
+}
+
 const getMatchingCoordinates = async ({
   x,
   y,
   characterId,
   illustrationId,
-}) => {
+}: getMatchingCoordinatesParams) => {
   const coordinates = await prisma.coordinate.findMany({
     where: {
       minX: { lte: x },
