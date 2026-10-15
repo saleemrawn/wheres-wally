@@ -1,5 +1,10 @@
 import { prisma } from "../lib/prisma";
 
+interface addLeaderboardTimeParams {
+  name: string;
+  time: number;
+}
+
 const getLeaderboard = async () => {
   const times = await prisma.leaderboard.findMany({
     take: 10,
@@ -17,7 +22,7 @@ const getRowTenTime = async () => {
   return row;
 };
 
-const addLeaderboardTime = async ({ name, time }) => {
+const addLeaderboardTime = async ({ name, time }: addLeaderboardTimeParams) => {
   const data = await prisma.leaderboard.create({ data: { name, time } });
   return data;
 };
