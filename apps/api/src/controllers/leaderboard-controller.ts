@@ -1,6 +1,13 @@
 import type { Request, Response, NextFunction } from "express";
 import { body, matchedData, validationResult } from "express-validator";
 import * as repository from "../repositories/leaderboard-repository";
+import type { ApiResponse } from "../lib/api-types";
+
+interface LeaderboardItem {
+  name: string;
+  time: number;
+  id: number;
+}
 
 const leaderboardValidators = [
   body("name")
@@ -23,7 +30,7 @@ const leaderboardValidators = [
 
 const getLeaderboard = async (
   _req: Request,
-  res: Response,
+  res: Response<ApiResponse<LeaderboardItem[]>>,
   next: NextFunction,
 ) => {
   try {
