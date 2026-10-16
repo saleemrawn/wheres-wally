@@ -42,11 +42,12 @@ const addLeaderboardTime = async (
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         message: "Please fix errors and try again",
         errors: errors.array(),
       });
+      return;
     }
 
     const { name, time } = matchedData(req);
@@ -72,10 +73,11 @@ const isTopTenTime = async (
     const row = await repository.getRowTenTime();
 
     if (!row) {
-      return res.status(200).json({ success: true, data: { isTopTen: true } });
+      res.status(200).json({ success: true, data: { isTopTen: true } });
+      return;
     }
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       data: {
         isTopTen: userTime < Number(row.time),
