@@ -19,6 +19,14 @@ interface AddLeaderboardTimeBody {
   time: string | number;
 }
 
+interface IsTopTenTimeParams {
+  time: number;
+}
+
+interface IsTopTenTimeBody {
+  isTopTen: boolean;
+}
+
 const leaderboardValidators = [
   body("name")
     .trim()
@@ -81,12 +89,12 @@ const addLeaderboardTime = async (
 };
 
 const isTopTenTime = async (
-  req: Request,
-  res: Response,
+  req: Request<IsTopTenTimeParams>,
+  res: Response<ApiResponse<IsTopTenTimeBody>>,
   next: NextFunction,
 ) => {
   try {
-    const userTime = Number(req.params["time"]);
+    const userTime = req.params["time"];
     const row = await repository.getRowTenTime();
 
     if (!row) {
@@ -97,7 +105,7 @@ const isTopTenTime = async (
     res.status(200).json({
       success: true,
       data: {
-        isTopTen: userTime < Number(row.time),
+        isTopTen: userTime < row.time,
       },
     });
   } catch (error) {
