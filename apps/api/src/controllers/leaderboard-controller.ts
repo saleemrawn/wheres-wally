@@ -1,5 +1,10 @@
 import type { Request, Response, NextFunction } from "express";
-import { body, matchedData, validationResult } from "express-validator";
+import {
+  body,
+  matchedData,
+  validationResult,
+  type ValidationError,
+} from "express-validator";
 import * as repository from "../repositories/leaderboard-repository";
 import type { ApiResponse } from "../lib/api-types";
 
@@ -7,6 +12,11 @@ interface LeaderboardItem {
   name: string;
   time: number;
   id: number;
+}
+
+interface AddLeaderboardTimeBody {
+  name: string;
+  time: string | number;
 }
 
 const leaderboardValidators = [
@@ -42,8 +52,8 @@ const getLeaderboard = async (
 };
 
 const addLeaderboardTime = async (
-  req: Request,
-  res: Response,
+  req: Request<{}, {}, AddLeaderboardTimeBody, {}>,
+  res: Response<ApiResponse<LeaderboardItem, ValidationError[]>>,
   next: NextFunction,
 ) => {
   try {
@@ -57,7 +67,7 @@ const addLeaderboardTime = async (
       return;
     }
 
-    const { name, time } = matchedData(req);
+    const { name, time } = matchedData<{ name: string; time: number }>(req);
     const data = await repository.addLeaderboardTime({ name, time });
 
     res.status(201).json({
