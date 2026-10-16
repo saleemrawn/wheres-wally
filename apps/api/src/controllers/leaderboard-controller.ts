@@ -68,7 +68,7 @@ const isTopTenTime = async (
   next: NextFunction,
 ) => {
   try {
-    const userTime = Number(req.params.time);
+    const userTime = Number(req.params["time"]);
     const row = await repository.getRowTenTime();
 
     if (!row) {
