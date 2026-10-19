@@ -41,7 +41,11 @@ const getCharacters = async (
   }
 };
 
-const validateCharacter = async (req, res, next) => {
+const validateCharacter = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
