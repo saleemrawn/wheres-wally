@@ -31,22 +31,32 @@ const getCharacters = async (req, res, next) => {
 
 const validateCharacter = async (req, res, next) => {
   try {
-    const x = Number(req.body?.coordinates.x);
-    const y = Number(req.body?.coordinates.y);
-    const characterId = Number(req.body?.characterId);
-    const illustrationId = Number(req.body?.illustrationId);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({
+        success: false,
+        message: "Please fix errors and try again",
+        errors: errors.array(),
+      });
+      return;
+    }
+
+    const { coordinates, characterId, illustrationId } = matchedData<{
+      coordinates: { x: number; y: number };
+      characterId: number;
+      illustrationId: number;
+    }>(req);
 
     const validatedCoordinates = await getMatchingCoordinates({
-      x,
-      y,
+      x: coordinates.x,
+      y: coordinates.y,
       characterId,
       illustrationId,
     });
 
     if (validatedCoordinates.length === 0) {
-      return res
-        .status(200)
-        .json({ success: false, message: "Wrong, try again!" });
+      res.status(200).json({ success: false, message: "Wrong, try again!" });
+      return;
     }
 
     res.status(200).json({
