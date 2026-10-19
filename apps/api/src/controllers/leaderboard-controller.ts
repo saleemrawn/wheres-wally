@@ -43,7 +43,6 @@ const leaderboardValidators = [
     .isInt()
     .withMessage("Time must be a number")
     .toInt(),
-  ,
 ];
 
 const getLeaderboard = async (
