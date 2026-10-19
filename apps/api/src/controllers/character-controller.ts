@@ -1,6 +1,14 @@
 import { body, matchedData, validationResult } from "express-validator";
 import { getMatchingCoordinates } from "../repositories/coordinate-repository";
 import * as repository from "../repositories/character-repository";
+import type { Request, Response, NextFunction } from "express";
+import type { ApiResponse } from "../lib/api-types";
+
+interface Character {
+  id: number;
+  name: string;
+  imageToken: string;
+}
 
 const validateCharacterValidators = [
   body("coordinates")
@@ -20,7 +28,11 @@ const validateCharacterValidators = [
     .withMessage("Expected integer for illustration ID"),
 ];
 
-const getCharacters = async (req, res, next) => {
+const getCharacters = async (
+  _req: Request,
+  res: Response<ApiResponse<Character[]>>,
+  next: NextFunction,
+) => {
   try {
     const characters = await repository.getCharacters();
     res.status(200).json({ success: true, data: characters });
